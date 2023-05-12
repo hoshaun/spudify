@@ -1,0 +1,40 @@
+@import "styles/mixins.scss";
+@import "styles/variables.scss";
+
+.playlist {
+  &__item {
+    @include fade;
+
+    color: #8395a7;
+    height: 5rem;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &:hover {
+      background-color: #ee5253;
+      cursor: pointer;
+      color: $dark-background;
+    }
+
+    &--selected {
+      @extend .playlist__item;
+      background-color: darken($white, 5%);
+      color: $dark-background;
+
+      &--full {
+        @extend .playlist__item--selected;
+      }
+
+      &:hover {
+        background-color: darken($white, 5%);
+      }
+    }
+
+    &--full {
+      @extend .playlist__item;
+      opacity: $inactive-opacity;
+    }
+  }
+}
