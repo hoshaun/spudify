@@ -5,7 +5,7 @@ Spudify
 
 LHL Final Project
 
-Team Members: Kade Kobussen, Shaun Ho
+Team Members: Kade Kobussen, Shaun Ho, Justin Nguyen
 
 ## Summary
 
