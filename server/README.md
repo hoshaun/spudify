@@ -14,13 +14,13 @@ Create a database with the command `CREATE DATABASE spudify;`.
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information (example below)
     ```
-      DB_HOST=localhost
-      DB_USER=development
-      DB_PASS=development
-      DB_NAME=spudify
-      # Uncomment and set to true for Heroku
-      # DB_SSL=true if heroku
-      DB_PORT=5432
+    DB_HOST=localhost
+    DB_USER=development
+    DB_PASS=development
+    DB_NAME=spudify
+    # Uncomment and set to true for Heroku
+    # DB_SSL=true if heroku
+    DB_PORT=5432
     ```
 3. Install dependencies: `npm i`
 4. Reset database: `npm run db:reset`
