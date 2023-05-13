@@ -16,4 +16,4 @@ App name and design inspired by LHL instructor Francis Bourgouin and his love fo
 
 ## Backend Setup
 
-Please refer to [server README](https://github.com/hoshaun/spudify/tree/master/server/README.md) for backend setup instructions.
+Please refer to [server README](./server/README.md) for backend setup instructions.
