@@ -1,5 +1,3 @@
-# WORK IN PROGRESS
-
 Spudify Backend (using LHL Node Skeleton)
 =========
 
