@@ -24,9 +24,11 @@ app.use(cookieSession({
 
 // Define API Routes
 const userApiRoutes = require('./routes/users-api');
+const playlistApiRoutes = require('./routes/playlists-api');
 
 // Mount all resource routes
 app.use('/api/users', userApiRoutes);
+app.use('/api/playlists', playlistApiRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
