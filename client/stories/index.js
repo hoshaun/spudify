@@ -68,13 +68,13 @@ storiesOf("Playlist", module)
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
   })
   .add("Playlist 1", () => (
-    <DayList days={days} value={"Playlist 1"} onChange={action("setPlaylist")} />
+    <Playlist playlists={playlists} value={"Playlist 1"} onChange={action("setPlaylist")} />
   ))
   .add("Playlist 2", () => (
-    <DayList days={days} value={"Playlist 2"} onChange={action("setPlaylist")} />
+    <Playlist playlists={playlists} value={"Playlist 2"} onChange={action("setPlaylist")} />
   ))
   .add("Playlist 3", () => (
-    <DayList days={days} value={"Playlist 3"} onChange={action("setPlaylist")} />
+    <Playlist playlists={playlists} value={"Playlist 3"} onChange={action("setPlaylist")} />
   ));
 
 // Track Stories

@@ -4,7 +4,7 @@ import PlaylistItem from "./PlaylistItem";
 
 export default function Playlist(props) {
   const playlistItems = props.playlists.map(playlist => {
-    return <playlistItem 
+    return <PlaylistItem 
         key={playlist.id}
         name={playlist.name} 
         selected={playlist.name === props.value} 
