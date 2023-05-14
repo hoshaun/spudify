@@ -1,5 +1,5 @@
 import React from "react";
-
+import AudioPlayer from './AudioPlayer';
 import "components/Application.scss";
 
 export default function Application(props) {
@@ -15,6 +15,9 @@ export default function Application(props) {
         <nav className="sidebar__menu">
           {/* Playlist component goes here */}
         </nav>
+      </section>
+      <section className="audio-player">
+        <AudioPlayer />
       </section>
       <section className="tracks">
         {/* TrackList component goes here */}
