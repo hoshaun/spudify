@@ -20,7 +20,6 @@ export default function Login(props) {
       })
       .then(res => {
         setCookie('username', res.data);
-        console.log(cookies);
       })
       .catch(err => {
         setError(err.response.data);
