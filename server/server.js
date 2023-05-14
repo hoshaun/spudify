@@ -4,7 +4,7 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
-const cookieSession = require('cookie-session');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -14,13 +14,24 @@ const app = express();
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieSession({
-  name: 'session',
-  keys: ['spudify'],
+app.use(cors());
 
-  // Cookie Options
-  maxAge: 24 * 60 * 60 * 1000 // 24 hours
-}));
+app.use(cors(
+  {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+  }
+));
+
+app.use(function(req, res, next) {
+  res.header('Content-Type', 'application/json;charset=UTF-8');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
 // Define API Routes
 const userApiRoutes = require('./routes/users-api');
