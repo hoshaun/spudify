@@ -1,16 +1,13 @@
 import React from "react";
 
 import "components/Application.scss";
+import { useCookies } from "react-cookie";
 import Login from "./Login";
 import Button from "./Button";
-import { useCookies } from "react-cookie";
+import Logout from "./Logout";
 
 export default function Application(props) {
-  const [cookies, setCookie, removeCookie] = useCookies(['username']);
-
-  const logout = function() {
-    return removeCookie('username');
-  };
+  const [cookies, setCookie] = useCookies(['username']);
 
   return (
     <main className="layout">
@@ -22,9 +19,11 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <div className="logout">
-            { cookies.username && <Button confirm onClick={() => logout()}>Logout</Button> }
-          </div>
+          <section className="logout">
+            { cookies.username && 
+              <Logout />
+            }
+          </section>
           {/* Playlist component goes here */}
         </nav>
       </section>
