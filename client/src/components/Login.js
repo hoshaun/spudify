@@ -14,7 +14,7 @@ export default function Login(props) {
   const handleSubmit = function(action) {
     setError('');
 
-    return axios.post(`/${action}`, { 
+    return axios.post(`/api/users/${action}`, { 
         username: username, 
         password: password
       })
@@ -52,7 +52,7 @@ export default function Login(props) {
       <div className="error">{error}</div>
       <div className="buttons">
         <Button confirm onClick={() => handleSubmit('login')} >Login</Button>
-        <Button confirm onClick={() => handleSubmit('register')} >Register</Button>
+        <Button confirm onClick={() => handleSubmit('create')} >Register</Button>
       </div>
     </div>
   );

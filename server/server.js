@@ -40,13 +40,11 @@ app.use(function(req, res, next) {
 const userApiRoutes = require('./routes/users-api');
 const playlistApiRoutes = require('./routes/playlists-api');
 const trackApiRoutes = require('./routes/tracks-api');
-const loginRoutes = require('./routes/login');
 
 // Mount all resource routes
 app.use('/api/users', userApiRoutes);
 app.use('/api/playlists', playlistApiRoutes);
 app.use('/api/tracks', trackApiRoutes);
-app.use('/', loginRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
