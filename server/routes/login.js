@@ -13,14 +13,15 @@ router.post('/login', (req, res) => {
       if (!user) {
         return res
           .status(400)
-          .send("User does not exist please register");
+          .send("User does not exist. Please register.");
       }
      
       if (!bcrypt.compareSync(password, user.password)) {
         return res.status(403).send('Incorrect Username or Password\n');
       }
 
-      res.cookie('username', username);
+      //res.cookie('username', username);
+      return res.status(200).send(username);
     })
     .catch(err => {
       res
@@ -31,7 +32,8 @@ router.post('/login', (req, res) => {
 
 // POST logout
 router.post("/logout", (req, res) => {
-  req.session = null;
+  res.clearCookie('username');
+  return res.status(200).send("Successfully logged out.");
 });
 
 module.exports = router;

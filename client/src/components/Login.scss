@@ -1,0 +1,49 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: white;
+  padding: 5%;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.username-label {
+  display: flex;
+  justify-content: flex-start;
+  padding-right: 2%;
+}
+
+.username-field {
+  display: flex;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 1%;
+}
+
+.password-label {
+  display: flex;
+  padding-right: 2%;
+}
+
+.password-field {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 5%;
+}
