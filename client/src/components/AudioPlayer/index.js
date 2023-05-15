@@ -1,10 +1,9 @@
 import React from 'react';
 
-
 import { useRef, useState } from 'react';
 import { tracks } from './Tracks';
 
-import DisplayTrack from './DIsplayTrack';
+import DisplayTrack from './DisplayTrack';
 import Controls from './Controls';
 import ProgressBar from './ProgressBar';
 
