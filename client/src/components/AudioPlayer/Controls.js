@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   IoPlayBackSharp,
   IoPlayForwardSharp,
@@ -8,12 +8,35 @@ import {
   IoPauseSharp,
 } from 'react-icons/io5';
 
-const Controls = ({ audioRef, src }) => {
+const Controls = ({
+  audioRef,
+  progressBarRef,
+  duration,
+  setTimeProgress,
+  tracks,
+  trackIndex, 
+  setTrackIndex, 
+  setCurrentTrack, 
+}) => {
+
   const [isPlaying, setIsPlaying] = useState(false);
+  const playAnimationRef = useRef();
 
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
+
+  const repeat = useCallback(() => {
+    const currentTime = audioRef.current.currentTime;
+    setTimeProgress(currentTime);
+    progressBarRef.current.value = currentTime;
+    progressBarRef.current.style.setProperty(
+      '--range-progress',
+      `${(progressBarRef.current.value / duration) * 100}%`
+    );
+
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -21,29 +44,46 @@ const Controls = ({ audioRef, src }) => {
     } else {
       audioRef.current.pause();
     }
-  }, [isPlaying, audioRef]);
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [isPlaying, audioRef, repeat]);
+  
+  const skipForward = () => {};
+
+  const skipBackward = () => {};
+  
+  const handlePrevious = () => {};
+  
+  const handleNext = () => {
+    if (trackIndex >= tracks.length - 1) {
+      setTrackIndex(0);
+      setCurrentTrack(tracks[0]);
+    } else {
+      setTrackIndex((prev) => prev + 1);
+      setCurrentTrack(tracks[trackIndex + 1]);
+    }
+  };
 
   return (
     <div className="controls-wrapper">
       <div className="controls">
-        <button>
+        <button onClick={handlePrevious}>
           <IoPlaySkipBackSharp />
         </button>
-        <button>
+        <button onClick={skipBackward}>
           <IoPlayBackSharp />
         </button>
 
         <button onClick={togglePlayPause}>
           {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
         </button>
-        <button>
+        
+        <button onClick={skipForward}>
           <IoPlayForwardSharp />
         </button>
-        <button>
+        <button onClick={handleNext}>
           <IoPlaySkipForwardSharp />
         </button>
       </div>
-      <audio ref={audioRef} src={src} />
     </div>
   );
 };
