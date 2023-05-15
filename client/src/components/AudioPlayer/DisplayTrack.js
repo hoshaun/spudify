@@ -2,8 +2,8 @@ import React from 'react';
 
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 
-const DisplayTrack = ({ currentTrack, audioRef, setDuration,
-  progressBarRef, }) => {
+export default function DisplayTrack({ currentTrack, audioRef, setDuration,
+  progressBarRef, }) {
   const onLoadedMetadata = () => {
     const seconds = audioRef.current.duration;
     setDuration(seconds);
@@ -37,4 +37,3 @@ const DisplayTrack = ({ currentTrack, audioRef, setDuration,
   );
 };
 
-export default DisplayTrack;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ProgressBar = ({ progressBarRef, audioRef, currentTime, duration }) => {
+export default function ProgressBar({ progressBarRef, audioRef, currentTime, duration }) {
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };
@@ -29,5 +29,3 @@ const ProgressBar = ({ progressBarRef, audioRef, currentTime, duration }) => {
     </div>
   );
 };
-
-export default ProgressBar;

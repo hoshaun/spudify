@@ -8,7 +8,7 @@ import {
   IoPauseSharp,
 } from 'react-icons/io5';
 
-const Controls = ({
+export default function Controls({
   audioRef,
   progressBarRef,
   duration,
@@ -17,7 +17,7 @@ const Controls = ({
   trackIndex, 
   setTrackIndex, 
   setCurrentTrack, 
-}) => {
+}) {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const playAnimationRef = useRef();
@@ -88,4 +88,4 @@ const Controls = ({
   );
 };
 
-export default Controls;
+
