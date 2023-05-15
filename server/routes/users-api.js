@@ -49,15 +49,15 @@ router.post('/create', (req, res) => {
   const password = req.body.password;
   
   if (!(username && isAlphanumeric(username))) {
-    return res.status(400).send('Username has to be alphanumeric');
+    return res.status(400).send('Username must to be alphanumeric.\n');
   }
 
   if (!password) {
-    return res.status(400).send('Password cannot be empty.');
+    return res.status(400).send('Password cannot be empty.\n');
   }
 
   if (hasWhitespace(password)) {
-    return res.status(400).send('Password cannot contain spaces.');
+    return res.status(400).send('Password cannot contain spaces.\n');
   }
 
   userQueries.getUserByUsername(username)
@@ -66,9 +66,7 @@ router.post('/create', (req, res) => {
         const encryptedPassword = bcrypt.hashSync(password, 10);
         userQueries.createUser(username, encryptedPassword)
           .then(() => {
-            req.session.username = username;
-            res.status(200).send("user added");
-            res.redirect('/');
+            return res.status(200).send(username);
           })
           .catch(err => {
             res
@@ -79,6 +77,38 @@ router.post('/create', (req, res) => {
         return res.status(409).send('Username is already taken.\n');
       }
     })
+});
+
+// login as existing user
+router.post('/login', (req, res) => {
+  const username = req.body.username.toLowerCase();
+  const password = req.body.password;
+
+  userQueries.getUserByUsername(username)
+    .then(user => {
+      if (!user) {
+        return res
+          .status(400)
+          .send("User does not exist. Please register.\n");
+      }
+     
+      if (!bcrypt.compareSync(password, user.password)) {
+        return res.status(403).send('Incorrect Username or Password\n');
+      }
+
+      return res.status(200).send(username);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+// POST logout
+router.post("/logout", (req, res) => {
+  res.clearCookie('username');
+  return res.status(200).send("Successfully logged out.\n");
 });
 
 module.exports = router;
