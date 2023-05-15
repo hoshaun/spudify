@@ -47,7 +47,8 @@ const createUser = function(username, password) {
   const params = [username, password];
   const query = `
     INSERT INTO users (username, password)
-    VALUES ($1, $2);
+    VALUES ($1, $2)
+    RETURNING *;
   `;
   
   return db.query(query, params)

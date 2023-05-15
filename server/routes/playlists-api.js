@@ -5,7 +5,7 @@ const playlistQueries = require('../db/queries/playlists');
 
 // get all playlists
 router.get('/', (req, res) => {
-  playlistQueries.getPlaylists(req.session.username)
+  playlistQueries.getPlaylists(req.query.username)
     .then(playlists => {
       res.json({ playlists });
     })

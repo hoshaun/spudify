@@ -4,7 +4,7 @@ const trackQueries = require('../db/queries/tracks');
 
 // get all tracks
 router.get('/', (req, res) => {
-  trackQueries.getTracks(req.body.playlistId)
+  trackQueries.getTracks(req.query.playlistId)
     .then(tracks => {
       res.json({ tracks });
     })

@@ -1,13 +1,16 @@
 import React from "react";
 
 import "components/Application.scss";
-import { useCookies } from "react-cookie";
 import Login from "./Login";
 import Button from "./Button";
 import Logout from "./Logout";
+import useApplicationData from "hooks/useApplicationData";
 
 export default function Application(props) {
-  const [cookies, setCookie] = useCookies(['username']);
+  const {
+    cookies, 
+    state
+  } = useApplicationData();
 
   return (
     <main className="layout">
