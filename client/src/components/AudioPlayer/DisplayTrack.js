@@ -8,7 +8,6 @@ export default function DisplayTrack({ currentTrack, audioRef, setDuration,
     const seconds = audioRef.current.duration;
     setDuration(seconds);
     progressBarRef.current.max = seconds;
-    console.log(audioRef.current.duration);
   };
   return (
     <div>

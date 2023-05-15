@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ProgressBar({ progressBarRef, audioRef, currentTime, duration }) {
+export default function ProgressBar({ progressBarRef, audioRef, currentTime, duration, timeProgress }) {
   const handleProgressChange = () => {
     audioRef.current.currentTime = progressBarRef.current.value;
   };
@@ -18,7 +18,7 @@ export default function ProgressBar({ progressBarRef, audioRef, currentTime, dur
 
   return (
     <div className="progress">
-      <span className="time current">{formatTime(currentTime)}</span>
+      <span className="time current">{formatTime(timeProgress)}</span>
       <input
         type="range"
         ref={progressBarRef}

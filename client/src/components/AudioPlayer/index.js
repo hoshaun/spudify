@@ -34,8 +34,6 @@ export default function AudioPlayer(props) {
   // reference
   const progressBarRef = useRef();
   const audioRef = useRef();
-  
-  console.log(audioRef);
 
   return (
     <div className="audio-player">

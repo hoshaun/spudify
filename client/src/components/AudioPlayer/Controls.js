@@ -51,7 +51,16 @@ export default function Controls({
 
   const skipBackward = () => {};
   
-  const handlePrevious = () => {};
+  const handlePrevious = () => {
+    if (trackIndex === 0) {
+      let lastTrackIndex = tracks.length - 1;
+      setTrackIndex(lastTrackIndex);
+      setCurrentTrack(tracks[lastTrackIndex]);
+    } else {
+      setTrackIndex((prev) => prev - 1);
+      setCurrentTrack(tracks[trackIndex - 1]);
+    }
+  };
   
   const handleNext = () => {
     if (trackIndex >= tracks.length - 1) {
