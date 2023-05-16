@@ -20,7 +20,7 @@ export default function Track(props) {
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
-  const { mode, transition, back } = useVisualMode(props.interview ? SHOW : EMPTY);
+  const { mode, transition, back } = useVisualMode(props.track ? SHOW : EMPTY);
   
   // save button function
   const save = function(title, artist) {
@@ -31,7 +31,7 @@ export default function Track(props) {
 
     transition(SAVING);
 
-    props.addTrack(props.id, track)
+    props.addTrack(track)
       .then(() => {
         transition(SHOW);
       })

@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
+const playlistQueries = require('../db/queries/playlists');
 const { isAlphanumeric, hasWhitespace } = require('../helpers/helpers');
 
 // get all users
@@ -65,6 +66,9 @@ router.post('/create', (req, res) => {
     if (!user) {
         const encryptedPassword = bcrypt.hashSync(password, 10);
         userQueries.createUser(username, encryptedPassword)
+          .then(user => {
+            return playlistQueries.createPlaylist(user.id, "Untitled Playlist");
+          })
           .then(() => {
             return res.status(200).send(username);
           })

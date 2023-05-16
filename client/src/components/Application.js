@@ -1,13 +1,36 @@
 import React from "react";
 
 import "components/Application.scss";
-import { useCookies } from "react-cookie";
 import Login from "./Login";
 import Button from "./Button";
 import Logout from "./Logout";
+import Track from "./Track";
+import useApplicationData from "hooks/useApplicationData";
+import { getTracksForPlaylist } from "helpers/selectors";
 
 export default function Application(props) {
-  const [cookies, setCookie] = useCookies(['username']);
+  const {
+    cookies, 
+    state,
+    addTrack, 
+    editTrack, 
+    deleteTrack, 
+    setPlaylist
+  } = useApplicationData();
+  
+  const tracks = getTracksForPlaylist(state, state.playlist);
+  
+  const trackList = tracks.map((track) => {
+    return (
+      <Track 
+        key={track.id} 
+        {...track}
+        // addTrack={addTrack}
+        // editTrack={editTrack}
+        // deleteTrack={deleteTrack}
+      />
+    );
+  });
 
   return (
     <main className="layout">
@@ -34,7 +57,8 @@ export default function Application(props) {
       }
       { cookies.username &&
         <section className="tracks">
-          {/* TrackList component goes here */}
+          {trackList}
+          <Track />
         </section>
       }
     </main>
