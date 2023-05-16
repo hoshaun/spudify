@@ -6,8 +6,8 @@ import { action } from "@storybook/addon-actions";
 import "index.scss";
 
 import Button from "components/Button";
-import PlaylistItem from "components/PlaylistItem";
-import Playlist from "components/Playlist";
+import PlaylistItem from "components/Playlist/PlaylistItem";
+import Playlist from "components/Playlist/index";
 import Track from "components/Track/index.js";
 import Header from "components/Track/Header";
 import Empty from "components/Track/Empty";
