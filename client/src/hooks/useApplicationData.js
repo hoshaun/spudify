@@ -12,26 +12,39 @@ export default function useApplicationData() {
     tracks: {}
   });
 
+  // clear playlist data if user changes
+  useEffect(() => {
+    setState({
+      playlist: {},
+      playlists: [],
+      tracks: {}
+    });
+  }, [cookies.username]);
+
   // GET requests to get data and rerender components
   useEffect(() => {
     if (cookies.username) {
       axios.get('/api/playlists', { params: { username: cookies.username } })
-        .then(res => {
-          setState(prev => ({
-            ...prev,
-            playlist: res.data.playlists[0],
-            playlists: res.data.playlists
-          }));
-          return axios.get('/api/tracks', { params: { playlistId: res.data.playlists[0].id } });
+        .then(async res => {
+          if (res.data.playlists.length > 0) {
+            
+            setState(prev => ({
+              ...prev,
+              playlist: res.data.playlists[0],
+              playlists: res.data.playlists
+            }));
+
+            return axios.get('/api/tracks', { params: { playlistId: res.data.playlists[0].id } })
+              .then(res => {
+                setState(prev => ({
+                  ...prev,
+                  tracks: res.data
+                }));
+              });
+          }
         })
-        .then(res => {
-          setState(prev => ({
-            ...prev,
-            tracks: res.data
-          }));
-        });
     }
-  }, [isUpdated]);
+  }, [isUpdated, cookies.username]);
   
   // POST request to save a new track and update state
   const addTrack = function(newTrack) {

@@ -27,7 +27,7 @@ export default function Track(props) {
     const track = {
       title: title,
       artist: artist,
-      source: 'source', // TO DO
+      source: source,
       mimeType: 'audio/mpeg'
     };
 
@@ -47,7 +47,7 @@ export default function Track(props) {
     const track = {
       title: title,
       artist: artist,
-      source: 'source', // TO DO
+      source: source,
       mimeType: 'audio/mpeg'
     };
 
