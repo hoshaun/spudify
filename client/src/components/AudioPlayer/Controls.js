@@ -8,19 +8,27 @@ import {
   IoPauseSharp,
 } from 'react-icons/io5';
 
+import {
+  IoMdVolumeHigh,
+  IoMdVolumeOff,
+  IoMdVolumeLow,
+} from 'react-icons/io';
+
 export default function Controls({
   audioRef,
   progressBarRef,
   duration,
   setTimeProgress,
   tracks,
-  trackIndex, 
-  setTrackIndex, 
-  setCurrentTrack, 
+  trackIndex,
+  setTrackIndex,
+  setCurrentTrack,
+  handleNext, // Add handleNext prop
 }) {
-
   const [isPlaying, setIsPlaying] = useState(false);
   const playAnimationRef = useRef();
+  const [volume, setVolume] = useState(60);
+  const [muteVolume, setMuteVolume] = useState(false);
 
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
@@ -46,7 +54,7 @@ export default function Controls({
     }
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [isPlaying, audioRef, repeat]);
-  
+
   const skipForward = () => {
     audioRef.current.currentTime += 15;
   };
@@ -54,7 +62,7 @@ export default function Controls({
   const skipBackward = () => {
     audioRef.current.currentTime -= 15;
   };
-  
+
   const handlePrevious = () => {
     if (trackIndex === 0) {
       let lastTrackIndex = tracks.length - 1;
@@ -65,16 +73,13 @@ export default function Controls({
       setCurrentTrack(tracks[trackIndex - 1]);
     }
   };
-  
-  const handleNext = () => {
-    if (trackIndex >= tracks.length - 1) {
-      setTrackIndex(0);
-      setCurrentTrack(tracks[0]);
-    } else {
-      setTrackIndex((prev) => prev + 1);
-      setCurrentTrack(tracks[trackIndex + 1]);
+
+  useEffect(() => {
+    if (audioRef) {
+      audioRef.current.volume = volume / 100;
+      audioRef.current.muted = muteVolume;
     }
-  };
+  }, [volume, audioRef, muteVolume]);
 
   return (
     <div className="controls-wrapper">
@@ -89,13 +94,31 @@ export default function Controls({
         <button onClick={togglePlayPause}>
           {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
         </button>
-        
+
         <button onClick={skipForward}>
           <IoPlayForwardSharp />
         </button>
         <button onClick={handleNext}>
           <IoPlaySkipForwardSharp />
         </button>
+      </div>
+      <div className="volume">
+        <button onClick={() => setMuteVolume((prev) => !prev)}>
+          {muteVolume || volume < 5 ? (
+            <IoMdVolumeOff />
+          ) : volume < 40 ? (
+            <IoMdVolumeLow />
+          ) : (
+            <IoMdVolumeHigh />
+          )}
+        </button>
+        <input type="range"
+          min={0}
+          max={100}
+          value={volume}
+          onChange={(e) => setVolume(e.target.value)}
+
+        />
       </div>
     </div>
   );
