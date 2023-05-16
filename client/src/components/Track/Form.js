@@ -47,6 +47,14 @@ export default function Form(props) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          <input
+            className="track__create-input text--semi-bold"
+            name="artist"
+            type="text"
+            placeholder="Enter Artist Name"
+            value={artist}
+            onChange={(e) => setArtist(e.target.value)}
+          />
         </form>
         <section className="track__validation">{error}</section>
       </section>

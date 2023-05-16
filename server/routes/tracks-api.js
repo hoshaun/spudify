@@ -6,7 +6,12 @@ const trackQueries = require('../db/queries/tracks');
 router.get('/', (req, res) => {
   trackQueries.getTracks(req.query.playlistId)
     .then(tracks => {
-      res.json({ tracks });
+      res.json(
+        tracks.reduce(
+          (prev, curr) => ({ ...prev, [curr.id]: curr }),
+          {}
+        )
+      );
     })
     .catch(err => {
       res
@@ -35,7 +40,7 @@ router.post('/create', (req, res) => {
 });
 
 // update an existing track
-router.post('/update/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
   const title = req.body.title;
   const artist = req.body.artist;

@@ -36,7 +36,7 @@ router.post('/create', (req, res) => {
 });
 
 // update an existing playlist
-router.post('/update/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
 

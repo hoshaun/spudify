@@ -8,7 +8,7 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     playlist: null,
     playlists: [],
-    tracks: []
+    tracks: {}
   });
 
   // GET requests to get data and rerender components
@@ -26,71 +26,66 @@ export default function useApplicationData() {
         .then(res => {
           setState(prev => ({
             ...prev,
-            tracks: res.data.tracks
+            tracks: res.data
           }));
         });
     }
   }, []);
   
   /*
-  // PUT request to save a new interview and update state
-  const bookInterview = function(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
+
+  // POST request to save a new track and update state
+  const addTrack = function(track) {
+    return axios.post(`/api/tracks/create`, {
+      title: track.title,
+      artist: track.artist,
+      source: 'source', // TO DO => put upload file data here
+      mimeType: 'audio/mpeg',
+    })
+      .then(newTrack => {
+        const tracks = {
+          ...state.tracks,
+          [newTrack.id]: newTrack
+        }
+        setState({ ...state, tracks });
+      });
+  };
+
+  // PUT request to update an existing track and update state
+  const editTrack = function(id) {
+    const track = {
+      ...state.tracks[id]
     };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
+    const tracks = {
+      ...state.tracks,
+      [id]: track
     };
     
-    const days = updateSpots(state, appointments);
-    
-    return axios.put(`/api/appointments/${id}`, { interview: interview })
+    return axios.put(`/api/tracks/${id}`)
       .then(() => {
-        setState({ ...state, days, appointments });
+        setState({ ...state, tracks });
       });
   };
 
   // DELETE request to delete an existing interview and update state
-  const cancelInterview = function(id) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null
+  const deleteTrack = function(id) {
+    const track = {
+      ...state.tracks[id]
     };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
+    const tracks = {
+      ...state.tracks,
+      [id]: track
     };
 
-    const days = updateSpots(state, appointments);
-
-    return axios.delete(`/api/appointments/${id}`)
+    return axios.delete(`/api/tracks/${id}`)
       .then(() => {
-        setState({ ...state, days, appointments });
+        setState({ ...state, tracks });
       });
   };
   
   // setPlaylist state function
   const setPlaylist = playlist => setState({ ...state, playlist });
 
-  // returns a deep copy of days state object with updated spot count
-  const updateSpots = function(state, appointments) {
-    const days = JSON.parse(JSON.stringify(state.days));
-    const day = days.find(day => day.name === state.day);
-    let newSpots = 0;
-  
-    for (const appointmentId of day.appointments) {
-      const appointment = Object.values(appointments).find(appointment => appointmentId === appointment.id);
-      if (!appointment.interview) {
-        newSpots++;
-      }
-    }
-
-    day.spots = newSpots;
-    
-    return days;
-  };
   */
 
   return { cookies, state };
