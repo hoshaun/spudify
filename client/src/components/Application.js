@@ -4,20 +4,6 @@ import "components/Application.scss";
 import Playlist from './Playlist/index'
 
 export default function Application(props) {
-  const playlists = [
-    {
-      id: 1,
-      name: "Playlist 1"
-    },
-    {
-      id: 2,
-      name: "Playlist 2"
-    },
-    {
-      id: 3,
-      name: "Playlist 3"
-    },
-  ];
   return (
     <main className="layout">
       <section className="sidebar">
