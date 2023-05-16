@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import Button from "components/Button";
 
 export default function Form(props) {
-  const [title, setName] = useState(props.title || "");
-//   const [artist, setArtist] = useState(props.artist || "");
+  const [name, setName] = useState(props.name || "");
   const [error, setError] = useState("");
 
   // reset form input values
   const reset = function() {
     setName("");
-    // setArtist("");
     setError("");
   };
 
@@ -21,18 +19,13 @@ export default function Form(props) {
 
   // form input validation
   const validate = function() {
-    if (title === "") {
-      setError("Playlist title cannot be blank");
+    if (name === "") {
+      setError("Playlist name cannot be blank");
       return;
     }
-
-    // if (artist === "") {
-    //   setError("Artist title cannot be blank");
-    //   return;
-    // }
   
     setError("");
-    props.onSave(title);
+    props.onSave(name);
   };
 
   return (
@@ -41,10 +34,10 @@ export default function Form(props) {
         <form autoComplete="off" onSubmit={e => e.preventDefault()}>
           <input
             className="playlist__create-input text--semi-bold"
-            name="title"
+            name="name"
             type="text"
-            placeholder="Enter Playlist Title"
-            value={title}
+            placeholder="Enter Playlist Name"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </form>

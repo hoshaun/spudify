@@ -20,38 +20,29 @@ export default function Playlist(props) {
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
-  const { mode, transition, back } = useVisualMode(props.playlist ? SHOW : EMPTY);
+  const { mode, transition, back } = useVisualMode(props.id ? SHOW : EMPTY);
+
   const save = function(name) {
     const playlist = {
       name: name
     }
+
     transition(SAVING);
   }
 
   const destroy = function() {
     transition(DELETING, true);
-
   }
-
-  const playlistItems = props.playlists.map(playlist => {
-    return <PlaylistItem 
-        key={playlist.id}
-        name={playlist.name} 
-        selected={playlist.name === props.value} 
-        setPlaylist={() => props.onChange(playlist.name)}
-      />
-  });
 
   return (
     <article>
-    {playlistItems}
        {/* <Header /> */}
       {mode === EMPTY && (
         <Empty onAdd={() => transition(CREATE)} />
       )}
       {mode === SHOW && (
         <Show 
-          name={props.playlist.name} 
+          name={props.name} 
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         /> 
@@ -64,7 +55,7 @@ export default function Playlist(props) {
       )}
       {mode === EDIT && (
         <Form
-          title={props.playlist.name}
+          name={props.name}
           onCancel={back}
           onSave={save}
         />
