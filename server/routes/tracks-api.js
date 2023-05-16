@@ -64,7 +64,7 @@ router.delete('/:id', (req, res) => {
 
   trackQueries.deleteTrack(id)
     .then(() => {
-      return;
+      return res.status(200).send('Track successfully deleted.');
     })
     .catch(err => {
       res
