@@ -65,9 +65,10 @@ export default function Track(props) {
   // delete button function (when confirming delete)
   const destroy = function() {
     transition(DELETING, true);
+
     props.deleteTrack(props.id)
       .then(() => {
-        transition(EMPTY);
+        return;
       })
       .catch((e) => {
         transition(ERROR_DELETE, true);

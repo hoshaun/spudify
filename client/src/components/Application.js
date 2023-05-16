@@ -26,7 +26,7 @@ export default function Application(props) {
         {...track}
         addTrack={addTrack}
         editTrack={editTrack}
-        // deleteTrack={deleteTrack}
+        deleteTrack={deleteTrack}
       />
     );
   });

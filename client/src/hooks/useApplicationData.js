@@ -34,44 +34,43 @@ export default function useApplicationData() {
   }, [isUpdated]);
   
   // POST request to save a new track and update state
-  const addTrack = function(track) {
-    let newTrack = {
+  const addTrack = function(newTrack) {
+    let track = {
       playlistId: state.playlist.id,
-      ...track
+      ...newTrack
     };
 
-    return axios.post(`/api/tracks/create`, newTrack)
+    return axios.post(`/api/tracks/create`, track)
       .then(res => {
-        newTrack = {
+        track = {
           id: res.id,
-          ...newTrack
+          ...track
         };
         const tracks = {
           ...state.tracks,
-          [Object.keys(state.tracks).length + 1]: newTrack
+          [Object.keys(state.tracks).length + 1]: track
         };
         setIsUpdated(!isUpdated, setState({ ...state, tracks }));
       });
   };
 
   // PUT request to update an existing track and update state
-  const editTrack = function(id, track) {
-    const newTrack = {
+  const editTrack = function(id, newTrack) {
+    const track = {
       ...state.tracks[id],
-      ...track
+      ...newTrack
     }
     const tracks = {
       ...state.tracks,
-      [id]: newTrack
+      [id]: track
     };
     
-    return axios.put(`/api/tracks/${id}`, newTrack)
+    return axios.put(`/api/tracks/${id}`, track)
       .then(() => {
         setState({ ...state, tracks });
       });
   };
 
-  /*
   // DELETE request to delete an existing interview and update state
   const deleteTrack = function(id) {
     const track = {
@@ -84,14 +83,12 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/tracks/${id}`)
       .then(() => {
-        setState({ ...state, tracks });
+        setIsUpdated(!isUpdated, setState({ ...state, tracks }));
       });
   };
   
   // setPlaylist state function
-  const setPlaylist = playlist => setState({ ...state, playlist });
+  // const setPlaylist = playlist => setState({ ...state, playlist });
 
-  */
-
-  return { cookies, state, addTrack, editTrack };
+  return { cookies, state, addTrack, editTrack, deleteTrack };
 };
