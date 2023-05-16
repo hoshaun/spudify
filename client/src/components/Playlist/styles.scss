@@ -29,8 +29,8 @@ $track-height: 11rem;
   }
 
   &__card {
-    min-height: $track-height;
-    margin-left: 3rem;
+    height: 80px;
+    width: 100%;
     border-radius: 0.5rem;
     padding: 1.2rem 1.5rem;
     display: flex;
