@@ -20,18 +20,40 @@ export default function Track(props) {
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
-  const { mode, transition, back } = useVisualMode(props.track ? SHOW : EMPTY);
+  const { mode, transition, back } = useVisualMode(props.id ? SHOW : EMPTY);
   
-  // save button function
-  const save = function(title, artist) {
+  // create button function
+  const create = function(title, artist, source, mimeType) {
     const track = {
       title: title,
-      artist: artist
+      artist: artist,
+      source: 'source', // TO DO
+      mimeType: 'audio/mpeg'
     };
 
     transition(SAVING);
 
     props.addTrack(track)
+      .then(() => {
+        transition(EMPTY);
+      })
+      .catch((e) => {
+        transition(ERROR_SAVE, true);
+      });
+  };
+
+  // update button function
+  const update = function(title, artist, source, mimeType) {
+    const track = {
+      title: title,
+      artist: artist,
+      source: 'source', // TO DO
+      mimeType: 'audio/mpeg'
+    };
+
+    transition(SAVING);
+
+    props.editTrack(props.id, track)
       .then(() => {
         transition(SHOW);
       })
@@ -60,8 +82,8 @@ export default function Track(props) {
       )}
       {mode === SHOW && (
         <Show 
-          title={props.track.title} 
-          artist={props.track.artist} 
+          title={props.title} 
+          artist={props.artist} 
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         /> 
@@ -69,15 +91,15 @@ export default function Track(props) {
       {mode === CREATE && (
         <Form
           onCancel={back}
-          onSave={save}
+          onSave={create}
         />
       )}
       {mode === EDIT && (
         <Form
-          title={props.track.title}
-          artist={props.track.artist} 
+          title={props.title}
+          artist={props.artist} 
           onCancel={back}
-          onSave={save}
+          onSave={update}
         />
       )}
       {(mode === SAVING || mode === DELETING) && (

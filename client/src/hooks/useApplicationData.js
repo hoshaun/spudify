@@ -5,8 +5,9 @@ import { useCookies } from "react-cookie";
 
 export default function useApplicationData() {
   const [cookies, setCookie] = useCookies(['username']);
+  const [isUpdated, setIsUpdated] = useState(false);
   const [state, setState] = useState({
-    playlist: null,
+    playlist: {},
     playlists: [],
     tracks: {}
   });
@@ -30,43 +31,47 @@ export default function useApplicationData() {
           }));
         });
     }
-  }, []);
+  }, [isUpdated]);
   
-  /*
-
   // POST request to save a new track and update state
   const addTrack = function(track) {
-    return axios.post(`/api/tracks/create`, {
-      title: track.title,
-      artist: track.artist,
-      source: 'source', // TO DO => put upload file data here
-      mimeType: 'audio/mpeg',
-    })
-      .then(newTrack => {
+    let newTrack = {
+      playlistId: state.playlist.id,
+      ...track
+    };
+
+    return axios.post(`/api/tracks/create`, newTrack)
+      .then(res => {
+        newTrack = {
+          id: res.id,
+          ...newTrack
+        };
         const tracks = {
           ...state.tracks,
-          [newTrack.id]: newTrack
-        }
-        setState({ ...state, tracks });
+          [Object.keys(state.tracks).length + 1]: newTrack
+        };
+        setIsUpdated(!isUpdated, setState({ ...state, tracks }));
       });
   };
 
   // PUT request to update an existing track and update state
-  const editTrack = function(id) {
-    const track = {
-      ...state.tracks[id]
-    };
+  const editTrack = function(id, track) {
+    const newTrack = {
+      ...state.tracks[id],
+      ...track
+    }
     const tracks = {
       ...state.tracks,
-      [id]: track
+      [id]: newTrack
     };
     
-    return axios.put(`/api/tracks/${id}`)
+    return axios.put(`/api/tracks/${id}`, newTrack)
       .then(() => {
         setState({ ...state, tracks });
       });
   };
 
+  /*
   // DELETE request to delete an existing interview and update state
   const deleteTrack = function(id) {
     const track = {
@@ -88,5 +93,5 @@ export default function useApplicationData() {
 
   */
 
-  return { cookies, state };
+  return { cookies, state, addTrack, editTrack };
 };
