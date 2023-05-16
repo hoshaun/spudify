@@ -47,9 +47,13 @@ export default function Controls({
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [isPlaying, audioRef, repeat]);
   
-  const skipForward = () => {};
+  const skipForward = () => {
+    audioRef.current.currentTime += 15;
+  };
 
-  const skipBackward = () => {};
+  const skipBackward = () => {
+    audioRef.current.currentTime -= 15;
+  };
   
   const handlePrevious = () => {
     if (trackIndex === 0) {
