@@ -23,12 +23,11 @@ export default function Track(props) {
   const { mode, transition, back } = useVisualMode(props.id ? SHOW : EMPTY);
   
   // create button function
-  const create = function(title, artist, source, mimeType) {
+  const create = function(title, artist, source) {
     const track = {
       title: title,
       artist: artist,
-      source: source,
-      mimeType: 'audio/mpeg'
+      source: source
     };
 
     transition(SAVING);
@@ -43,12 +42,11 @@ export default function Track(props) {
   };
 
   // update button function
-  const update = function(title, artist, source, mimeType) {
+  const update = function(title, artist, source) {
     const track = {
       title: title,
       artist: artist,
-      source: source,
-      mimeType: 'audio/mpeg'
+      source: source
     };
 
     transition(SAVING);
