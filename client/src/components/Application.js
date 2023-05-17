@@ -1,6 +1,7 @@
 import React from "react";
 import AudioPlayer from './AudioPlayer';
 import "components/Application.scss";
+import Playlist from "./Playlist";
 import Login from "./Login";
 import Logout from "./Logout";
 import Track from "./Track";
@@ -8,6 +9,21 @@ import useApplicationData from "hooks/useApplicationData";
 import { getTracksForPlaylist } from "helpers/selectors";
 
 export default function Application(props) {
+  const playlistData = [
+    {
+      id: 1,
+      name: "Playlist 1"
+    },
+    {
+      id: 2,
+      name: "Playlist 2"
+    },
+    {
+      id: 3,
+      name: "Playlist 3"
+    },
+  ];
+
   const {
     cookies, 
     state,
@@ -18,6 +34,15 @@ export default function Application(props) {
   } = useApplicationData();
   
   const tracks = getTracksForPlaylist(state, state.playlist);
+  
+  const playlists = playlistData.map((playlist) => {
+    return (
+      <Playlist 
+        key={playlist.id} 
+        {...playlist}
+      />
+    );
+  });
   
   const trackList = tracks.map((track) => {
     return (
@@ -47,7 +72,7 @@ export default function Application(props) {
               <Logout />
             }
           </section>
-          {/* Playlist component goes here */}
+          {playlists}
         </nav>
       </section>
       { !cookies.username &&
