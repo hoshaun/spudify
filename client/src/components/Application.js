@@ -1,10 +1,11 @@
 import React from "react";
-import AudioPlayer from './AudioPlayer';
+
 import "components/Application.scss";
-import Playlist from "./Playlist";
 import Login from "./Login";
 import Logout from "./Logout";
 import Track from "./Track";
+import AudioPlayer from './AudioPlayer';
+import Playlist from "./Playlist";
 import useApplicationData from "hooks/useApplicationData";
 import { getTracksForPlaylist } from "helpers/selectors";
 
@@ -75,7 +76,7 @@ export default function Application(props) {
           {playlists}
         </nav>
       </section>
-      { !cookies.username &&
+      { cookies.username &&
         <section className="audio-player">
           <AudioPlayer />
         </section>
