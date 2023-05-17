@@ -5,6 +5,7 @@
 $track-height: 11rem;
 
 .playlist {
+
   &__add {
     min-height: $track-height;
     padding: 2rem 0;
@@ -50,6 +51,9 @@ $track-height: 11rem;
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-end;
+      padding-left: 15em;
+        height: 50%;
+        width: 25%;
     }
 
     &--create {
@@ -82,11 +86,13 @@ $track-height: 11rem;
 
     &--confirm {
       @include border-card($danger-color);
-
+      font-size: 12px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      height: 20%;
+      width: 100%;
     }
 
     &--error {
@@ -105,6 +111,10 @@ $track-height: 11rem;
 
   &__actions {
     margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    width: 25%;
     &-modify {
         width: fit-content
     }

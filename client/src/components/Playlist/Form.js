@@ -45,8 +45,8 @@ export default function Form(props) {
       </section>
       <section className="playlist__card-right">
         <section className="playlist__actions">
-          <Button danger onClick={cancel} >Cancel</Button>
-          <Button confirm onClick={validate} >Save</Button>
+          <Button danger onClick={cancel} >X</Button>
+          <Button confirm onClick={validate} >✔</Button>
         </section>
       </section>
     </main>

@@ -1,5 +1,6 @@
 import React from "react";
 import './PlaylistItem.scss';
+import './styles.scss'
 import PlaylistItem from "./PlaylistItem";
 import useVisualMode from "hooks/useVisualMode";
 import Header from "./Header";
