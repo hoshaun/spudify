@@ -80,7 +80,7 @@ export default function Application(props) {
       </section>
       { cookies.username &&
         <section className="audio-player">
-          <AudioPlayer />
+          <AudioPlayer tracks={trackList} />
         </section>
       }
       { !cookies.username &&

@@ -72,6 +72,9 @@ export default function Form(props) {
       </section>
       <section className="track__card-right">
         <section className="track__actions">
+          <Button confirm onClick={null}>
+            <FontAwesomeIcon icon="fa-regular fa-circle-play" />
+          </Button>
           <Button danger onClick={cancel} >Cancel</Button>
           <Button confirm onClick={validate} >Save</Button>
         </section>
