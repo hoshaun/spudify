@@ -73,7 +73,9 @@ export default function Application(props) {
               <Logout />
             }
           </section>
-          {playlists}
+          { cookies.username && 
+            playlists
+          }
         </nav>
       </section>
       { cookies.username &&
