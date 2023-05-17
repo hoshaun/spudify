@@ -36,7 +36,7 @@ export default function DisplayTrack({
         </div>
         <div className="text">
           <p className="title">{currentTrack.title}</p>
-          <p>{currentTrack.author}</p>
+          <p>{currentTrack.artist}</p>
         </div>
       </div>
     </div>

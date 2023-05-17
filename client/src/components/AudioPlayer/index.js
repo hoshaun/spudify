@@ -2,6 +2,7 @@ import React from 'react';
 import { useRef, useState } from 'react';
 import beautiful from './SampleData/a_beautiful_day.mp3';
 import world from './SampleData/We_Are_The_World.mp3';
+import test01 from './SampleData/test01.mp3';
 
 import DisplayTrack from './DisplayTrack';
 import Controls from './Controls';
@@ -12,12 +13,17 @@ export default function AudioPlayer(props) {
     {
       title: 'Its a beautiful day',
       src: beautiful,
-      author: 'Trinix ft Rushawn',
+      artist: 'Trinix ft Rushawn',
     },
     {
       title: 'We Are The World',
       src: world,
-      author: 'Michael Jackson',
+      artist: 'Michael Jackson',
+    },
+    {
+      title: 'test01',
+      src: test01,
+      artist: 'testArtist',
     },
   ];
 
