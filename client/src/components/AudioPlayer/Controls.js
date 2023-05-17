@@ -14,8 +14,6 @@ import {
   IoMdVolumeLow,
 } from 'react-icons/io';
 
-import { useCookies } from 'react-cookie';
-
 export default function Controls({
   audioRef,
   progressBarRef,
@@ -27,7 +25,6 @@ export default function Controls({
   setCurrentTrack,
   handleNext, // Add handleNext prop
 }) {
-  const [cookies, setCookies] = useCookies(['username']);
   const [isPlaying, setIsPlaying] = useState(false);
   const playAnimationRef = useRef();
   const [volume, setVolume] = useState(60);
@@ -52,7 +49,7 @@ export default function Controls({
   }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
   useEffect(() => {
-    if (cookies.username) {
+    if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.play();
       } else {
