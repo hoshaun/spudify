@@ -16,7 +16,6 @@ export default function AudioPlayer(props) {
   const audioRef = useRef();
 
   useEffect(() => {
-    console.log(props.tracks);
     setTracks(props.tracks ? props.tracks : []);
   }, [props]);
 
