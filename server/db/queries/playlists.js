@@ -4,9 +4,13 @@ const db = require('../connection');
 const getPlaylists = function(username) {
   const params = [username];
   const query = `
-    SELECT * FROM playlists
+    SELECT playlists.id, playlists.name, array_agg(DISTINCT tracks.id) AS tracks
+    FROM playlists
     JOIN users ON users.id = creator_id
-    WHERE username = $1;
+    JOIN tracks ON tracks.playlist_id = playlists.id
+    WHERE username = $1
+    GROUP BY playlists.id
+    ORDER BY playlists.id;
   `;
 
   return db.query(query, params)

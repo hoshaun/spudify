@@ -5,7 +5,7 @@ const playlistQueries = require('../db/queries/playlists');
 
 // get all playlists
 router.get('/', (req, res) => {
-  playlistQueries.getPlaylists(req.session.username)
+  playlistQueries.getPlaylists(req.query.username)
     .then(playlists => {
       res.json({ playlists });
     })
@@ -36,7 +36,7 @@ router.post('/create', (req, res) => {
 });
 
 // update an existing playlist
-router.post('/update/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
 

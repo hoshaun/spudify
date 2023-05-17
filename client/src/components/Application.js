@@ -1,10 +1,15 @@
 import React from "react";
-
+import AudioPlayer from './AudioPlayer';
 import "components/Application.scss";
 import Playlist from "./Playlist";
+import Login from "./Login";
+import Logout from "./Logout";
+import Track from "./Track";
+import useApplicationData from "hooks/useApplicationData";
+import { getTracksForPlaylist } from "helpers/selectors";
 
 export default function Application(props) {
-  const data = [
+  const playlistData = [
     {
       id: 1,
       name: "Playlist 1"
@@ -18,12 +23,36 @@ export default function Application(props) {
       name: "Playlist 3"
     },
   ];
+
+  const {
+    cookies, 
+    state,
+    addTrack, 
+    editTrack, 
+    deleteTrack, 
+    setPlaylist
+  } = useApplicationData();
   
-  const playlists = data.map((playlist) => {
+  const tracks = getTracksForPlaylist(state, state.playlist);
+  
+  const playlists = playlistData.map((playlist) => {
     return (
       <Playlist 
         key={playlist.id} 
         {...playlist}
+      />
+    );
+  });
+  
+  const trackList = tracks.map((track) => {
+    return (
+      <Track 
+        key={track.id} 
+        {...track}
+        mimeType={track.mime_type}
+        addTrack={addTrack}
+        editTrack={editTrack}
+        deleteTrack={deleteTrack}
       />
     );
   });
@@ -38,12 +67,32 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
+          <section className="logout">
+            { cookies.username && 
+              <Logout />
+            }
+          </section>
           {playlists}
         </nav>
       </section>
-      <section className="tracks">
-        {/* TrackList component goes here */}
-      </section>
+      { !cookies.username &&
+        <section className="audio-player">
+          <AudioPlayer />
+        </section>
+      }
+      { !cookies.username &&
+        <section className="login">
+          <Login />
+        </section>
+      }
+      { cookies.username &&
+        <section className="tracks">
+          {trackList}
+          <Track
+            addTrack={addTrack} 
+          />
+        </section>
+      }
     </main>
   );
 }
