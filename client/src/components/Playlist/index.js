@@ -37,7 +37,7 @@ export default function Playlist(props) {
 
   return (
     <article>
-       {/* <Header /> */}
+
       {mode === EMPTY && (
         <Empty onAdd={() => transition(CREATE)} />
       )}
@@ -83,6 +83,7 @@ export default function Playlist(props) {
           onClose={back} 
         />
       )}
+          <Header />
     </article>
   );
 }
