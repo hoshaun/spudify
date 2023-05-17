@@ -14,6 +14,8 @@ import {
   IoMdVolumeLow,
 } from 'react-icons/io';
 
+import { useCookies } from 'react-cookie';
+
 export default function Controls({
   audioRef,
   progressBarRef,
@@ -25,6 +27,7 @@ export default function Controls({
   setCurrentTrack,
   handleNext, // Add handleNext prop
 }) {
+  const [cookies, setCookies] = useCookies(['username']);
   const [isPlaying, setIsPlaying] = useState(false);
   const playAnimationRef = useRef();
   const [volume, setVolume] = useState(60);
@@ -34,26 +37,30 @@ export default function Controls({
     setIsPlaying((prev) => !prev);
   };
 
-  // const repeat = useCallback(() => {
-  //   const currentTime = audioRef.current.currentTime;
-  //   setTimeProgress(currentTime);
-  //   progressBarRef.current.value = currentTime;
-  //   progressBarRef.current.style.setProperty(
-  //     '--range-progress',
-  //     `${(progressBarRef.current.value / duration) * 100}%`
-  //   );
-
-  //   playAnimationRef.current = requestAnimationFrame(repeat);
-  // }, [audioRef, duration, progressBarRef, setTimeProgress]);
+  const repeat = useCallback(() => {
+    if (audioRef.current) {
+      const currentTime = audioRef.current.currentTime;
+      setTimeProgress(currentTime);
+      progressBarRef.current.value = currentTime;
+      progressBarRef.current.style.setProperty(
+        '--range-progress',
+        `${(progressBarRef.current.value / duration) * 100}%`
+      );
+  
+      playAnimationRef.current = requestAnimationFrame(repeat);
+    }
+  }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
   useEffect(() => {
-    if (isPlaying) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
+    if (cookies.username) {
+      if (isPlaying) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+      playAnimationRef.current = requestAnimationFrame(repeat);
     }
-    //playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [isPlaying, audioRef, /*repeat*/]);
+  }, [isPlaying, audioRef, repeat]);
 
   const skipForward = () => {
     audioRef.current.currentTime += 15;
