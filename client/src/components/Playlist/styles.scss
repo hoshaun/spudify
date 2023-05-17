@@ -35,9 +35,9 @@ $track-height: 11rem;
     padding: 1.2rem 1.5rem;
     display: flex;
     justify-content: space-between;
-    flex-flow: row wrap;
+    flex-direction: column;
+    flex-flow: row nowrap;
     color: $white;
-
     &-left {
       display: flex;
       flex-direction: column;
@@ -52,6 +52,7 @@ $track-height: 11rem;
       align-items: flex-end;
         height: 50%;
         width: 25%;
+
     }
 
     &--create {
