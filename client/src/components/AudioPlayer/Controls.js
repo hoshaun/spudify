@@ -34,17 +34,17 @@ export default function Controls({
     setIsPlaying((prev) => !prev);
   };
 
-  const repeat = useCallback(() => {
-    const currentTime = audioRef.current.currentTime;
-    setTimeProgress(currentTime);
-    progressBarRef.current.value = currentTime;
-    progressBarRef.current.style.setProperty(
-      '--range-progress',
-      `${(progressBarRef.current.value / duration) * 100}%`
-    );
+  // const repeat = useCallback(() => {
+  //   const currentTime = audioRef.current.currentTime;
+  //   setTimeProgress(currentTime);
+  //   progressBarRef.current.value = currentTime;
+  //   progressBarRef.current.style.setProperty(
+  //     '--range-progress',
+  //     `${(progressBarRef.current.value / duration) * 100}%`
+  //   );
 
-    playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [audioRef, duration, progressBarRef, setTimeProgress]);
+  //   playAnimationRef.current = requestAnimationFrame(repeat);
+  // }, [audioRef, duration, progressBarRef, setTimeProgress]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -52,8 +52,8 @@ export default function Controls({
     } else {
       audioRef.current.pause();
     }
-    playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [isPlaying, audioRef, repeat]);
+    //playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [isPlaying, audioRef, /*repeat*/]);
 
   const skipForward = () => {
     audioRef.current.currentTime += 15;
