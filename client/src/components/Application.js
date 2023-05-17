@@ -24,6 +24,7 @@ export default function Application(props) {
       <Track 
         key={track.id} 
         {...track}
+        mimeType={track.mime_type}
         addTrack={addTrack}
         editTrack={editTrack}
         deleteTrack={deleteTrack}

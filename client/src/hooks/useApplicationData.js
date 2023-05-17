@@ -53,7 +53,13 @@ export default function useApplicationData() {
       ...newTrack
     };
 
-    return axios.post(`/api/tracks/create`, track)
+    let data = new FormData();
+    data.append('track', JSON.stringify(track));
+    data.append('file', track.source);
+
+    return axios.post(`/api/tracks/create`, data, { 
+      headers: { 'Content-Type': 'multipart/form-data' } 
+    })
       .then(res => {
         track = {
           id: res.id,
@@ -77,8 +83,14 @@ export default function useApplicationData() {
       ...state.tracks,
       [id]: track
     };
+
+    let data = new FormData();
+    data.append('track', JSON.stringify(track));
+    data.append('file', track.source);
     
-    return axios.put(`/api/tracks/${id}`, track)
+    return axios.put(`/api/tracks/${id}`, data, { 
+      headers: { 'Content-Type': 'multipart/form-data' } 
+    })
       .then(() => {
         setState({ ...state, tracks });
       });

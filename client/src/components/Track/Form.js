@@ -65,7 +65,7 @@ export default function Form(props) {
           <input
             name="source"
             type="file"
-            onChange={(e) => setSource(e.target.files)}
+            onChange={(e) => setSource(e.target.files[0])}
           />
         </form>
         <section className="track__validation">{error}</section>

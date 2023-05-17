@@ -85,6 +85,8 @@ export default function Track(props) {
         <Show 
           title={props.title} 
           artist={props.artist} 
+          source={props.source}
+          mimeType={props.mimeType}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         /> 
