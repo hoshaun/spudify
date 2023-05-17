@@ -1,0 +1,14 @@
+@import "styles/variables.scss";
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-message {
+  color: white;
+  font-size: larger;
+  padding-bottom: 1em;
+}

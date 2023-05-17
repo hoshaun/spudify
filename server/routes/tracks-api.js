@@ -1,13 +1,19 @@
 const express = require('express');
 const router  = express.Router();
-const playlistQueries = require('../db/queries/playlists');
 const trackQueries = require('../db/queries/tracks');
+const multer = require('multer');
+const upload = multer();
 
 // get all tracks
 router.get('/', (req, res) => {
-  trackQueries.getTracks(req.body.playlistId)
+  trackQueries.getTracks(req.query.playlistId)
     .then(tracks => {
-      res.json({ tracks });
+      res.json(
+        tracks.reduce(
+          (prev, curr) => ({ ...prev, [curr.id]: curr }),
+          {}
+        )
+      );
     })
     .catch(err => {
       res
@@ -17,12 +23,13 @@ router.get('/', (req, res) => {
 });
 
 // create a new track
-router.post('/create', (req, res) => {
-  const playlistId = req.body.playlistId;
-  const title = req.body.title;
-  const artist = req.body.artist;
-  const source = req.body.source;
-  const mimeType = req.body.mimeType;
+router.post('/create', upload.single('file'), (req, res) => {
+  const track = JSON.parse(req.body.track);
+  const playlistId = track.playlistId;
+  const title = track.title;
+  const artist = track.artist;
+  const source = req.file;
+  const mimeType = req.file.mimetype;
 
   trackQueries.createTrack(playlistId, title, artist, source, mimeType)
     .then(track => {
@@ -36,12 +43,13 @@ router.post('/create', (req, res) => {
 });
 
 // update an existing track
-router.post('/update/:id', (req, res) => {
+router.put('/:id', upload.single('file'), (req, res) => {
+  const track = JSON.parse(req.body.track);
   const id = req.params.id;
-  const title = req.body.title;
-  const artist = req.body.artist;
-  const source = req.body.source;
-  const mimeType = req.body.mimeType;
+  const title = track.title;
+  const artist = track.artist;
+  const source = req.file;
+  const mimeType = req.file.mimetype;
 
   trackQueries.updateTrack(id, title, artist, source, mimeType)
     .then(track => {
@@ -60,7 +68,7 @@ router.delete('/:id', (req, res) => {
 
   trackQueries.deleteTrack(id)
     .then(() => {
-      return;
+      return res.status(200).send('Track successfully deleted.');
     })
     .catch(err => {
       res

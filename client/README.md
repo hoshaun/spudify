@@ -1,6 +1,5 @@
-# WORK IN PROGRESS
-
-# Spudify Frontend
+Spudify Frontend
+=========
 
 ## Setup
 
