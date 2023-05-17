@@ -4,12 +4,14 @@ import Button from "components/Button";
 export default function Form(props) {
   const [title, setTitle] = useState(props.title || "");
   const [artist, setArtist] = useState(props.artist || "");
+  const [source, setSource] = useState(props.source || "");
   const [error, setError] = useState("");
 
   // reset form input values
   const reset = function() {
     setTitle("");
     setArtist("");
+    setSource("");
     setError("");
   };
 
@@ -30,9 +32,14 @@ export default function Form(props) {
       setError("Artist title cannot be blank");
       return;
     }
+
+    if (source === "") {
+      setError("File upload is required.");
+      return;
+    }
   
     setError("");
-    props.onSave(title, artist);
+    props.onSave(title, artist, source);
   };
 
   return (
@@ -54,6 +61,11 @@ export default function Form(props) {
             placeholder="Enter Artist Name"
             value={artist}
             onChange={(e) => setArtist(e.target.value)}
+          />
+          <input
+            name="source"
+            type="file"
+            onChange={(e) => setSource(e.target.files[0])}
           />
         </form>
         <section className="track__validation">{error}</section>

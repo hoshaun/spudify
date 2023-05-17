@@ -4,7 +4,7 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const cors = require('cors');
 

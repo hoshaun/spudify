@@ -5,63 +5,92 @@ import { useCookies } from "react-cookie";
 
 export default function useApplicationData() {
   const [cookies, setCookie] = useCookies(['username']);
+  const [isUpdated, setIsUpdated] = useState(false);
   const [state, setState] = useState({
-    playlist: null,
+    playlist: {},
     playlists: [],
     tracks: {}
   });
+
+  // clear playlist data if user changes
+  useEffect(() => {
+    setState({
+      playlist: {},
+      playlists: [],
+      tracks: {}
+    });
+  }, [cookies.username]);
 
   // GET requests to get data and rerender components
   useEffect(() => {
     if (cookies.username) {
       axios.get('/api/playlists', { params: { username: cookies.username } })
-        .then(res => {
-          setState(prev => ({
-            ...prev,
-            playlist: res.data.playlists[0],
-            playlists: res.data.playlists
-          }));
-          return axios.get('/api/tracks', { params: { playlistId: res.data.playlists[0].id } });
-        })
-        .then(res => {
-          setState(prev => ({
-            ...prev,
-            tracks: res.data
-          }));
-        });
-    }
-  }, []);
-  
-  /*
+        .then(async res => {
+          if (res.data.playlists.length > 0) {
+            
+            setState(prev => ({
+              ...prev,
+              playlist: res.data.playlists[0],
+              playlists: res.data.playlists
+            }));
 
+            return axios.get('/api/tracks', { params: { playlistId: res.data.playlists[0].id } })
+              .then(res => {
+                setState(prev => ({
+                  ...prev,
+                  tracks: res.data
+                }));
+              });
+          }
+        })
+    }
+  }, [isUpdated, cookies.username]);
+  
   // POST request to save a new track and update state
-  const addTrack = function(track) {
-    return axios.post(`/api/tracks/create`, {
-      title: track.title,
-      artist: track.artist,
-      source: 'source', // TO DO => put upload file data here
-      mimeType: 'audio/mpeg',
+  const addTrack = function(newTrack) {
+    let track = {
+      playlistId: state.playlist.id,
+      ...newTrack
+    };
+
+    let data = new FormData();
+    data.append('track', JSON.stringify(track));
+    data.append('file', track.source);
+
+    return axios.post(`/api/tracks/create`, data, { 
+      headers: { 'Content-Type': 'multipart/form-data' } 
     })
-      .then(newTrack => {
+      .then(res => {
+        track = {
+          id: res.id,
+          ...track
+        };
         const tracks = {
           ...state.tracks,
-          [newTrack.id]: newTrack
-        }
-        setState({ ...state, tracks });
+          [Object.keys(state.tracks).length + 1]: track
+        };
+        setIsUpdated(!isUpdated, setState({ ...state, tracks }));
       });
   };
 
   // PUT request to update an existing track and update state
-  const editTrack = function(id) {
+  const editTrack = function(id, newTrack) {
     const track = {
-      ...state.tracks[id]
-    };
+      ...state.tracks[id],
+      ...newTrack
+    }
     const tracks = {
       ...state.tracks,
       [id]: track
     };
+
+    let data = new FormData();
+    data.append('track', JSON.stringify(track));
+    data.append('file', track.source);
     
-    return axios.put(`/api/tracks/${id}`)
+    return axios.put(`/api/tracks/${id}`, data, { 
+      headers: { 'Content-Type': 'multipart/form-data' } 
+    })
       .then(() => {
         setState({ ...state, tracks });
       });
@@ -79,14 +108,12 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/tracks/${id}`)
       .then(() => {
-        setState({ ...state, tracks });
+        setIsUpdated(!isUpdated, setState({ ...state, tracks }));
       });
   };
   
   // setPlaylist state function
-  const setPlaylist = playlist => setState({ ...state, playlist });
+  // const setPlaylist = playlist => setState({ ...state, playlist });
 
-  */
-
-  return { cookies, state };
+  return { cookies, state, addTrack, editTrack, deleteTrack };
 };
