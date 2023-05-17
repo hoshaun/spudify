@@ -1,10 +1,6 @@
 import React from "react";
 
 export default function Show(props) {
-  const blob = new Blob(props.source.data, { type: props.mimeType });
-  const url = window.URL.createObjectURL(blob);
-  console.log(blob);
-
   return (
     <main className="track__card track__card--show">
       <section className="track__card-left">
@@ -13,7 +9,6 @@ export default function Show(props) {
           <h4 className="text--light">Artist</h4>
           <h3 className="text--regular">{props.artist}</h3>
         </section>
-        <audio src={url} controls />
       </section>
       <section className="track__card-right">
         <section className="track__actions">
