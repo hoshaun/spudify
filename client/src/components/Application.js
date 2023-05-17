@@ -1,5 +1,5 @@
 import React from "react";
-
+import AudioPlayer from './AudioPlayer';
 import "components/Application.scss";
 import Login from "./Login";
 import Logout from "./Logout";
@@ -50,6 +50,11 @@ export default function Application(props) {
           {/* Playlist component goes here */}
         </nav>
       </section>
+      { !cookies.username &&
+        <section className="audio-player">
+          <AudioPlayer />
+        </section>
+      }
       { !cookies.username &&
         <section className="login">
           <Login />
