@@ -75,7 +75,7 @@ color: rgb(47, 46, 46);
       );
       &:hover {
         color: darken($white, 5%);
-        background-color: rgba($track-color, $active-opacity);
+        background-color: rgba($track-color, $inactive-opacity);
       }
     }
 
