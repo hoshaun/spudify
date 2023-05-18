@@ -17,7 +17,7 @@ export default function DisplayTrack({
   let src;
 
   // convert downloaded file from DB to playable base64 audio string
-  if (currentTrack && currentTrack.source) {
+  if (currentTrack && currentTrack.source && currentTrack.mimeType) {
     let binary = '';
     const bytes = new Uint8Array(currentTrack.source.data);
 
@@ -25,7 +25,7 @@ export default function DisplayTrack({
         binary += String.fromCharCode(bytes[i]);
     }
 
-    src = currentTrack ? 'data:audio/mpeg;base64,' + btoa(binary) : '';
+    src = 'data:' + currentTrack.mimeType + ';base64,' + btoa(binary);
   }
   
   return (

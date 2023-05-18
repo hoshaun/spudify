@@ -11,6 +11,8 @@ export default function AudioPlayer(props) {
   const [currentTrack, setCurrentTrack] = useState({});
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [restart, setRestart] = useState(false);
 
   const progressBarRef = useRef();
   const audioRef = useRef();
@@ -18,6 +20,8 @@ export default function AudioPlayer(props) {
   useEffect(() => {
     setTracks(props.tracks ? props.tracks : []);
     setCurrentTrack(props.currentTrack ? props.currentTrack : {});
+    setIsPlaying(props.isPlaying ? props.isPlaying : false);
+    setRestart(props.restart ? props.restart : false);
   }, [props]);
 
   const handleNext = () => {
@@ -26,7 +30,7 @@ export default function AudioPlayer(props) {
       setCurrentTrack(tracks[0] ? tracks[0].props : {});
     } else {
       setTrackIndex((prev) => prev + 1);
-      setCurrentTrack(tracks[trackIndex + 1]);
+      setCurrentTrack(tracks[trackIndex + 1].props);
     }
   };
 
@@ -41,14 +45,19 @@ export default function AudioPlayer(props) {
           handleNext
         }} />
         <Controls {...{
+          currentTrack,
           audioRef,
           progressBarRef,
           duration,
           setTimeProgress,
+          isPlaying,
+          restart,
           tracks,
           trackIndex,
           setTrackIndex,
           setCurrentTrack,
+          setIsPlaying,
+          setRestart,
           handleNext
         }} />
         <ProgressBar {...{

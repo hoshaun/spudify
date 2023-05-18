@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "components/Application.scss";
 import Login from "./Login";
@@ -28,6 +28,8 @@ export default function Application(props) {
   const {
     cookies, 
     state,
+    isPlaying,
+    restart,
     addTrack, 
     editTrack, 
     deleteTrack,
@@ -82,7 +84,12 @@ export default function Application(props) {
       </section>
       { cookies.username &&
         <section className="audio-player">
-          <AudioPlayer tracks={trackList} currentTrack={state.currentTrack} />
+          <AudioPlayer 
+            tracks={trackList} 
+            currentTrack={state.currentTrack}
+            isPlaying={isPlaying} 
+            restart={restart}
+          />
         </section>
       }
       { !cookies.username &&
