@@ -72,6 +72,10 @@ export default function Track(props) {
         transition(ERROR_DELETE, true);
       });
   };
+
+  const play = function() {
+    return props.onPlay(props);
+  };
   
   return (
     <article className="track">
@@ -87,6 +91,7 @@ export default function Track(props) {
           mimeType={props.mimeType}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
+          onPlay={play}
         /> 
       )}
       {mode === CREATE && (

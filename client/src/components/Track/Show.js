@@ -10,6 +10,11 @@ export default function Show(props) {
           <h3 className="text--regular">{props.artist}</h3>
         </section>
       </section>
+      <section className="track__card-play">
+        <section className="track__actions-button">
+          <i className="fa-regular fa-circle-play fa-5x" onClick={props.onPlay}></i>
+        </section>
+      </section>
       <section className="track__card-right">
         <section className="track__actions">
           <img
