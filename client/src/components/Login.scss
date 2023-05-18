@@ -3,7 +3,10 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background-color: white;
+  background-color: rgb(49, 49, 49);
+  border: 2px solid #FFBB00;
+  color:#FFBB00;
+  border-radius: 20px;
   padding: 5%;
 }
 
@@ -17,6 +20,7 @@
   display: flex;
   justify-content: flex-start;
   padding-right: 2%;
+  color:#FFBB00
 }
 
 .username-field {
@@ -29,6 +33,7 @@
 .password-label {
   display: flex;
   padding-right: 2%;
+  color:#FFBB00
 }
 
 .password-field {

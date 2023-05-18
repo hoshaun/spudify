@@ -42,8 +42,9 @@
 }
 
 .button--confirm:hover {
-  color: $white;
-  background-color: $confirm-color;
+  color: black;
+  background-color: #FFBB00;
+  border-color: black
 }
 
 .button:last-of-type {
