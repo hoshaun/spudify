@@ -43,6 +43,7 @@ $track-height: 11rem;
       flex-direction: column;
       justify-content: space-between;
       min-width: 50%;
+      padding-top: 0.5rem;
     }
 
     &-right {
@@ -52,7 +53,7 @@ $track-height: 11rem;
       align-items: flex-end;
         height: 50%;
         width: 25%;
-
+  padding-top:2rem;
     }
 
     &--create {
