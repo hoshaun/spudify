@@ -14,18 +14,32 @@ export default function DisplayTrack({
     progressBarRef.current.max = seconds;
   };
 
+  let src;
+
+  // convert downloaded file from DB to playable base64 audio string
+  if (currentTrack && currentTrack.source && currentTrack.mimeType) {
+    let binary = '';
+    const bytes = new Uint8Array(currentTrack.source.data);
+
+    for (let i = 0; i < bytes.byteLength; i++) {
+        binary += String.fromCharCode(bytes[i]);
+    }
+
+    src = 'data:' + currentTrack.mimeType + ';base64,' + btoa(binary);
+  }
+  
   return (
     <div>
       <audio
-        src={currentTrack.src}
+        src={src ? src : ''}
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={handleNext}
       />
       <div className="audio-info">
         <div className="audio-image">
-          {currentTrack.thumbnail ? (
-            <img src={currentTrack.thumbnail} alt="audio avatar" />
+          {Object.keys(currentTrack).length > 0 ? (
+            <img src={currentTrack.thumbnail ? currentTrack.thumbnail : ''} />
           ) : (
             <div className="icon-wrapper">
               <span className="audio-icon">
@@ -35,8 +49,8 @@ export default function DisplayTrack({
           )}
         </div>
         <div className="text">
-          <p className="title">{currentTrack.title}</p>
-          <p>{currentTrack.author}</p>
+          <p className="title">{currentTrack ? currentTrack.title : ''}</p>
+          <p>{currentTrack ? currentTrack.artist : ''}</p>
         </div>
       </div>
     </div>

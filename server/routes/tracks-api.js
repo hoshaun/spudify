@@ -28,7 +28,7 @@ router.post('/create', upload.single('file'), (req, res) => {
   const playlistId = track.playlistId;
   const title = track.title;
   const artist = track.artist;
-  const source = req.file;
+  const source = req.file.buffer;
   const mimeType = req.file.mimetype;
 
   trackQueries.createTrack(playlistId, title, artist, source, mimeType)
@@ -48,7 +48,7 @@ router.put('/:id', upload.single('file'), (req, res) => {
   const id = req.params.id;
   const title = track.title;
   const artist = track.artist;
-  const source = req.file;
+  const source = req.file.buffer;
   const mimeType = req.file.mimetype;
 
   trackQueries.updateTrack(id, title, artist, source, mimeType)

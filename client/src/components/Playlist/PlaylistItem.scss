@@ -1,7 +1,9 @@
 @import "styles/mixins.scss";
 @import "styles/variables.scss";
 
+
 .playlist {
+
   &__item {
     @include fade;
 

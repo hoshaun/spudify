@@ -6,18 +6,32 @@ import { useCookies } from "react-cookie";
 export default function useApplicationData() {
   const [cookies, setCookie] = useCookies(['username']);
   const [isUpdated, setIsUpdated] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [restart, setRestart] = useState(false);
   const [state, setState] = useState({
     playlist: {},
     playlists: [],
-    tracks: {}
+    tracks: {},
+    currentTrack: {}
   });
+  
+  // setCurrentTrack state function
+  const setCurrentTrack = function(currentTrack) {
+    setIsPlaying(true, setRestart(true, setState({ ...state, currentTrack })));
+  }
+  
+  // setPlaylist state function
+  // const setPlaylist = playlist => setState({ ...state, playlist });
 
   // clear playlist data if user changes
   useEffect(() => {
+    setIsPlaying(false);
+    setRestart(false);
     setState({
       playlist: {},
       playlists: [],
-      tracks: {}
+      tracks: {},
+      currentTrack: {}
     });
   }, [cookies.username]);
 
@@ -111,9 +125,15 @@ export default function useApplicationData() {
         setIsUpdated(!isUpdated, setState({ ...state, tracks }));
       });
   };
-  
-  // setPlaylist state function
-  // const setPlaylist = playlist => setState({ ...state, playlist });
 
-  return { cookies, state, addTrack, editTrack, deleteTrack };
+  return { 
+    cookies, 
+    state, 
+    isPlaying,
+    restart,
+    addTrack, 
+    editTrack, 
+    deleteTrack, 
+    setCurrentTrack
+  };
 };
