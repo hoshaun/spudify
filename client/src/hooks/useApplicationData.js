@@ -9,8 +9,15 @@ export default function useApplicationData() {
   const [state, setState] = useState({
     playlist: {},
     playlists: [],
-    tracks: {}
+    tracks: {},
+    currentTrack: {}
   });
+  
+  // setCurrentTrack state function
+  const setCurrentTrack = currentTrack => setState({ ...state, currentTrack });
+  
+  // setPlaylist state function
+  // const setPlaylist = playlist => setState({ ...state, playlist });
 
   // clear playlist data if user changes
   useEffect(() => {
@@ -111,9 +118,6 @@ export default function useApplicationData() {
         setIsUpdated(!isUpdated, setState({ ...state, tracks }));
       });
   };
-  
-  // setPlaylist state function
-  // const setPlaylist = playlist => setState({ ...state, playlist });
 
-  return { cookies, state, addTrack, editTrack, deleteTrack };
+  return { cookies, state, addTrack, editTrack, deleteTrack, setCurrentTrack };
 };

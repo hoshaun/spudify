@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "components/Application.scss";
 import Login from "./Login";
@@ -30,10 +30,11 @@ export default function Application(props) {
     state,
     addTrack, 
     editTrack, 
-    deleteTrack, 
+    deleteTrack,
+    setCurrentTrack,
     setPlaylist
   } = useApplicationData();
-  
+
   const tracks = getTracksForPlaylist(state, state.playlist);
   
   const playlists = playlistData.map((playlist) => {
@@ -54,6 +55,7 @@ export default function Application(props) {
         addTrack={addTrack}
         editTrack={editTrack}
         deleteTrack={deleteTrack}
+        onPlay={setCurrentTrack}
       />
     );
   });
@@ -80,7 +82,7 @@ export default function Application(props) {
       </section>
       { cookies.username &&
         <section className="audio-player">
-          <AudioPlayer tracks={trackList} />
+          <AudioPlayer tracks={trackList} currentTrack={state.currentTrack} />
         </section>
       }
       { !cookies.username &&

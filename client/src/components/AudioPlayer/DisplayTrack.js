@@ -27,7 +27,7 @@ export default function DisplayTrack({
 
     src = currentTrack ? 'data:audio/mpeg;base64,' + btoa(binary) : '';
   }
-
+  
   return (
     <div>
       <audio
@@ -38,8 +38,8 @@ export default function DisplayTrack({
       />
       <div className="audio-info">
         <div className="audio-image">
-          {currentTrack ? (
-            <img src={currentTrack.thumbnail ? currentTrack.thumbnail : ''} alt="audio avatar" />
+          {Object.keys(currentTrack).length > 0 ? (
+            <img src={currentTrack.thumbnail ? currentTrack.thumbnail : ''} />
           ) : (
             <div className="icon-wrapper">
               <span className="audio-icon">

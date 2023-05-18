@@ -6,9 +6,9 @@ import Controls from './Controls';
 import ProgressBar from './ProgressBar';
 
 export default function AudioPlayer(props) {
-  const [tracks, setTracks] = useState(props.tracks ? props.tracks : []);
+  const [tracks, setTracks] = useState([]);
   const [trackIndex, setTrackIndex] = useState(0);
-  const [currentTrack, setCurrentTrack] = useState(tracks[trackIndex]);
+  const [currentTrack, setCurrentTrack] = useState({});
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
@@ -17,13 +17,13 @@ export default function AudioPlayer(props) {
 
   useEffect(() => {
     setTracks(props.tracks ? props.tracks : []);
+    setCurrentTrack(props.currentTrack ? props.currentTrack : {});
   }, [props]);
 
   const handleNext = () => {
     if (trackIndex >= tracks.length - 1) {
       setTrackIndex(0);
       setCurrentTrack(tracks[0] ? tracks[0].props : {});
-      console.log(tracks);
     } else {
       setTrackIndex((prev) => prev + 1);
       setCurrentTrack(tracks[trackIndex + 1]);

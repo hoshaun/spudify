@@ -12,7 +12,7 @@ export default function Show(props) {
       </section>
       <section className="track__card-play">
         <section className="track__actions-button">
-          <i className="fa-regular fa-circle-play fa-5x"></i>
+          <i className="fa-regular fa-circle-play fa-5x" onClick={props.onPlay}></i>
         </section>
       </section>
       <section className="track__card-right">

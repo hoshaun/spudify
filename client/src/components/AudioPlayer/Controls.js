@@ -30,12 +30,15 @@ export default function Controls({
   const [volume, setVolume] = useState(60);
   const [muteVolume, setMuteVolume] = useState(false);
 
+  // TO DO: download 2 diff songs for testing
+  // TO DO: try exporting setIsPlaying to app.js to play on track change
+
   const togglePlayPause = () => {
     setIsPlaying((prev) => !prev);
   };
 
   const repeat = useCallback(() => {
-    if (audioRef.current) {
+    if (isPlaying) {
       const currentTime = audioRef.current.currentTime;
       setTimeProgress(currentTime);
       progressBarRef.current.value = currentTime;
@@ -46,18 +49,23 @@ export default function Controls({
   
       playAnimationRef.current = requestAnimationFrame(repeat);
     }
-  }, [audioRef, duration, progressBarRef, setTimeProgress]);
+  }, [isPlaying/*, audioRef, duration, progressBarRef, setTimeProgress*/]);
 
   useEffect(() => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
-      playAnimationRef.current = requestAnimationFrame(repeat);
+    if (isPlaying) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
     }
-  }, [isPlaying, audioRef, repeat]);
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [isPlaying/*, audioRef, repeat*/]);
+
+  useEffect(() => {
+    if (audioRef) {
+      audioRef.current.volume = volume / 100;
+      audioRef.current.muted = muteVolume;
+    }
+  }, [volume, audioRef, muteVolume]);
 
   const skipForward = () => {
     audioRef.current.currentTime += 15;
@@ -77,13 +85,6 @@ export default function Controls({
       setCurrentTrack(tracks[trackIndex - 1]);
     }
   };
-
-  useEffect(() => {
-    if (audioRef) {
-      audioRef.current.volume = volume / 100;
-      audioRef.current.muted = muteVolume;
-    }
-  }, [volume, audioRef, muteVolume]);
 
   return (
     <div className="controls-wrapper">
