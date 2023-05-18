@@ -3,6 +3,9 @@ import { useRef, useState } from 'react';
 import beautiful from './SampleData/a_beautiful_day.mp3';
 import world from './SampleData/We_Are_The_World.mp3';
 
+import './index-styles.scss'
+import './slider-styles.scss'
+
 import DisplayTrack from './DisplayTrack';
 import Controls from './Controls';
 import ProgressBar from './ProgressBar';
@@ -41,6 +44,7 @@ export default function AudioPlayer(props) {
 
   return (
     <div className="audio-player">
+      <link rel="stylesheet" href="styles.css"></link>
       <div className="inner">
         <DisplayTrack {...{
           currentTrack,
