@@ -5,6 +5,7 @@
 $track-height: 11rem;
 
 .playlist {
+color: rgb(47, 46, 46);
   &__add {
     min-height: $track-height;
     padding: 2rem 0;
@@ -54,21 +55,22 @@ $track-height: 11rem;
         height: 50%;
         width: 25%;
   padding-top:2rem;
+  padding-right: 20px;
     }
 
     &--create {
       background-color: $dark-background;
       display: flex;
-      width: 275px;
+      width: 288px;
     }
 
     &--show {
       color: rgba($track-color, $active-opacity);
       background: linear-gradient(
         90deg,
-        rgba($track-color, $active-opacity),
-        rgba($track-color, $active-opacity) 8px,
-        rgba($track-color, $inactive-opacity) 0,
+        rgba(128, 128, 128, $active-opacity),
+        rgba(47, 47, 47, $active-opacity) 8px,
+        rgba(128, 128, 128, $inactive-opacity) 0,
         rgba($track-color, $inactive-opacity)
       );
       &:hover {
