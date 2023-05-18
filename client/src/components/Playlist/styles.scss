@@ -88,7 +88,7 @@ color: rgb(47, 46, 46);
 
     &--confirm {
       @include border-card($danger-color);
-      font-size: 12px;
+      font-size: 10px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
