@@ -38,18 +38,16 @@ export default function DisplayTrack({
       />
       <div className="audio-info">
         <div className="audio-image">
-          {Object.keys(currentTrack).length > 0 ? (
-            <img src={currentTrack.thumbnail ? currentTrack.thumbnail : ''} />
-          ) : (
-            <div className="icon-wrapper">
-              <span className="audio-icon">
-                <BsMusicNoteBeamed />
-              </span>
-            </div>
-          )}
+          <div className="icon-wrapper">
+            <span className="audio-icon">
+              <BsMusicNoteBeamed />
+            </span>
+          </div>
         </div>
         <div className="text">
-          <p className="title">{currentTrack ? currentTrack.title : ''}</p>
+          { currentTrack && currentTrack.title && 
+            <p className="title">{currentTrack.title}</p>
+          }
           <p>{currentTrack ? currentTrack.artist : ''}</p>
         </div>
       </div>

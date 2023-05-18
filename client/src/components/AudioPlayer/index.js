@@ -39,7 +39,6 @@ export default function AudioPlayer(props) {
 
   return (
     <div className="audio-player">
-      <link rel="stylesheet" href="styles.css"></link>
       <div className="inner">
         <DisplayTrack {...{
           currentTrack,
