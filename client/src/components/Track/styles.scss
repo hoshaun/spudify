@@ -42,7 +42,7 @@ $track-height: 11rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-width: 50%;
+      min-width: 33%;
     }
 
     &-right {
@@ -50,6 +50,14 @@ $track-height: 11rem;
       flex-direction: column;
       justify-content: flex-end;
       align-items: flex-end;
+      width: 33%;
+    }
+
+    &-play {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 33%;
     }
 
     &--create {
