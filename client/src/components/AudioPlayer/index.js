@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useRef, useState } from 'react';
 
+import './index-styles.scss'
+import './slider-styles.scss'
+
 import DisplayTrack from './DisplayTrack';
 import Controls from './Controls';
 import ProgressBar from './ProgressBar';
@@ -36,6 +39,7 @@ export default function AudioPlayer(props) {
 
   return (
     <div className="audio-player">
+      <link rel="stylesheet" href="styles.css"></link>
       <div className="inner">
         <DisplayTrack {...{
           currentTrack,

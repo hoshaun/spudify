@@ -98,31 +98,31 @@ export default function Controls({
     <div className="controls-wrapper">
       <div className="controls">
         <button onClick={handlePrevious}>
-          <IoPlaySkipBackSharp />
+          <IoPlaySkipBackSharp className='control-button'/>
         </button>
         <button onClick={skipBackward}>
-          <IoPlayBackSharp />
+          <IoPlayBackSharp className='control-button'/>
         </button>
 
         <button onClick={togglePlayPause}>
-          {isPlaying ? <IoPauseSharp /> : <IoPlaySharp />}
+          {isPlaying ? <IoPauseSharp className='control-button'/> : <IoPlaySharp className='control-button'/>}
         </button>
 
         <button onClick={skipForward}>
-          <IoPlayForwardSharp />
+          <IoPlayForwardSharp className='control-button'/>
         </button>
         <button onClick={handleNext}>
-          <IoPlaySkipForwardSharp />
+          <IoPlaySkipForwardSharp className='control-button'/>
         </button>
       </div>
       <div className="volume">
         <button onClick={() => setMuteVolume((prev) => !prev)}>
           {muteVolume || volume < 5 ? (
-            <IoMdVolumeOff />
+            <IoMdVolumeOff className='control-button'/>
           ) : volume < 40 ? (
-            <IoMdVolumeLow />
+            <IoMdVolumeLow className='control-button'/>
           ) : (
-            <IoMdVolumeHigh />
+            <IoMdVolumeHigh className='control-button'/>
           )}
         </button>
         <input type="range"
@@ -130,7 +130,7 @@ export default function Controls({
           max={100}
           value={volume}
           onChange={(e) => setVolume(e.target.value)}
-
+          className="volume-slider"
         />
       </div>
     </div>
