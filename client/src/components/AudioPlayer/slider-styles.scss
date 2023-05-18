@@ -54,7 +54,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 8px;
   border-radius: 50%;
   border: none;
-  background-color: #ACD3a4;
+  background-color: #FFBB00;
   cursor: pointer;
   position: relative;
 }
@@ -86,7 +86,7 @@ input[type="range"] {
 
 input[type="range"]::before {
   /* ... */
-  background: #ACD3a4;
+  background: #FFBB00;
   width: var(--range-progress);
   /* ... */
 }
