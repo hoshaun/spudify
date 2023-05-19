@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 
 // create a new playlist
 router.post('/create', (req, res) => {
-  const username = req.session.username;
+  const username = req.query.username;
   const name = req.body.name;
 
   userQueries.getUserId(username)

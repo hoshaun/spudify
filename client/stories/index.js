@@ -7,7 +7,7 @@ import "index.scss";
 
 import Button from "components/Button";
 import PlaylistItem from "components/Playlist/PlaylistItem";
-import Playlist from "components/Playlist/index";
+import Playlist from "components/Playlist/index.js";
 import Track from "components/Track/index.js";
 import Header from "components/Track/Header";
 import Empty from "components/Track/Empty";
