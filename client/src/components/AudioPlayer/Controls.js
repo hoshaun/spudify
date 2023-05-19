@@ -131,6 +131,9 @@ export default function Controls({
           value={volume}
           onChange={(e) => setVolume(e.target.value)}
           className="volume-slider"
+          style={{
+            background: `linear-gradient(to right, #FFBB00 ${volume}%, #ccc ${volume}%)`,
+          }}
         />
       </div>
     </div>
