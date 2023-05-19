@@ -1,5 +1,14 @@
 @import "styles/variables.scss";
 
+.main-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 .login {
   display: flex;
   flex-direction: column;
@@ -20,7 +29,7 @@
   flex-direction: column;
   min-width: 18rem;
   padding: $spacing 0;
-background-color: black;
+  background-color: black;
   &--centered {
     align-self: center;
   }
