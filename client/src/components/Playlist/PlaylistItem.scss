@@ -14,11 +14,13 @@ i {
 
   &.fa-sharp {
     padding-bottom: 0.75rem;
+
     &:hover {
       color: #FFBB00;
     }
   }
  &.fa-solid {
+  font-size: 25px;
   &:hover {
     color: black;
   }
@@ -92,8 +94,6 @@ color: rgb(47, 46, 46);
 
     &--create {
       color: $white;
-      display: flex;
-      width: 288px;
       background-color: rgb(24, 24, 24);
       border: 2px solid rgb(49, 49, 49);
     }
@@ -125,11 +125,8 @@ color: rgb(47, 46, 46);
      border: 2px solid $danger-color;
       font-size: 10px;
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       align-items: center;
       height: 80px;
-      width: 288px;
     }
 
     &--error {
@@ -149,8 +146,8 @@ color: rgb(47, 46, 46);
   &__actions {
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    width: 25%;
+    width: 10%;
+    
     &-modify {
         width: fit-content
     }
