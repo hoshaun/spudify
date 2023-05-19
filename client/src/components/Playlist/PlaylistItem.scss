@@ -40,10 +40,28 @@ i {
 }
 
 .playlist {
+
+&__item {
+  &--selected {
+    color: red;
+    background-color: red;
+  }
+}
+
 color: rgb(47, 46, 46);
   &__add {
-    min-height: $track-height;
     padding: 2rem 0;
+    height: 5rem;
+    border: 1px solid rgb(47, 46, 46);
+    color: white;
+    background: linear-gradient(
+      90deg,
+      rgba(49, 49, 49, $active-opacity),
+      rgba(#ffffff, $inactive-opacity) 8px,
+      rgba(#ffffff, $inactive-opacity) 0,
+      rgba(#373636, $inactive-opacity)
+    );
+    border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -107,6 +125,8 @@ color: rgb(47, 46, 46);
         rgba(#aa875c, $inactive-opacity) 0,
         rgba(gray, $inactive-opacity)
       );
+      border: 2px solid rgb(49, 49, 49);
+      margin-bottom: 0.25rem;
       &:hover {
         color: rgb(49, 49, 49);
         background-color: #FFBB00;
