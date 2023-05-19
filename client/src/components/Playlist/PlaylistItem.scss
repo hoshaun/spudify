@@ -6,13 +6,30 @@ i {
 
   &.fa-regular {
     padding-top: rem;
+
   }
 
   &.fa-sharp {
-    padding-bottom: 0.75rem
+    padding-bottom: 0.75rem;
+    &:hover {
+      color: #FFBB00;
+    }
   }
-
-
+ &.fa-solid {
+  &:hover {
+    color: black;
+  }
+ }
+ &.fa-circle-xmark {
+  &:hover {
+   color: red
+  }
+  }
+ &.fa-circle-check {
+ &:hover {
+  color: green
+ }
+ }
 }
 
 
