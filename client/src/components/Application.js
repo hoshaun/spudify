@@ -23,6 +23,10 @@ export default function Application(props) {
       id: 3,
       name: "Playlist 3"
     },
+    {
+      id: 4,
+      name: "Playlist 4"
+    },
   ];
 
   const {
