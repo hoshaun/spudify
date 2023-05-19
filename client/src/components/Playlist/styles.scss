@@ -62,6 +62,8 @@ color: rgb(47, 46, 46);
       color: $white;
       display: flex;
       width: 288px;
+      background-color: rgb(24, 24, 24);
+      border: 2px solid white;
     }
 
     &--show {
@@ -145,7 +147,7 @@ color: rgb(47, 46, 46);
   }
 
   &__create-input {
-    background-color: rgb(49, 49, 49);
+    background-color: rgb(24, 24, 24);
     border: 0;
     border-bottom: 1px solid;
     color: #FFBB00;
