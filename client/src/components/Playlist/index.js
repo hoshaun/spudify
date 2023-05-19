@@ -9,8 +9,8 @@ export default function Playlist(props) {
     return <PlaylistItem 
         key={playlist.id}
         {... playlist}
-        selected={playlist.name === props.value} 
-        setPlaylist={() => props.onChange(playlist)}
+        selected={playlist.id === props.value} 
+        setPlaylist={() => props.onChange(playlist.id)}
         addPlaylist={props.addPlaylist}
         editPlaylist={props.editPlaylist}
         deletePlaylist={props.deletePlaylist}

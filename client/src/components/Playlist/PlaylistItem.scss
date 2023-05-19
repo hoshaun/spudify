@@ -92,6 +92,12 @@ color: rgb(47, 46, 46);
     flex-direction: column;
     flex-flow: row nowrap;
     color: $white;
+    &--selected {
+      @extend .playlist__card;
+      background-color: #FFBB00;
+      color: $dark-background;
+    }
+
     &-left {
       display: flex;
       flex-direction: column;

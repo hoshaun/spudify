@@ -1,8 +1,14 @@
 import React from "react";
 
 export default function Show(props) {
+  let showClass = "playlist__card playlist__card--show";
+  
+  if (props.selected) {
+    showClass = "playlist__card playlist__card--selected";
+  }
+
   return (
-    <main className="playlist__card playlist__card--show">
+    <main className={showClass}>
       <section className="playlist__card-left">
         <h2 className="text--regular">{props.name}</h2>
       </section>
