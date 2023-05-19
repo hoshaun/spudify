@@ -10,25 +10,6 @@ import useApplicationData from "hooks/useApplicationData";
 import { getTracksForPlaylist } from "helpers/selectors";
 
 export default function Application(props) {
-  const playlistData = [
-    {
-      id: 1,
-      name: "Playlist 1"
-    },
-    {
-      id: 2,
-      name: "Playlist 2"
-    },
-    {
-      id: 3,
-      name: "Playlist 3"
-    },
-    {
-      id: 4,
-      name: "Playlist 4"
-    },
-  ];
-
   const {
     cookies, 
     state,
@@ -37,20 +18,14 @@ export default function Application(props) {
     addTrack, 
     editTrack, 
     deleteTrack,
+    addPlaylist,
+    editPlaylist,
+    deletePlaylist,
     setCurrentTrack,
     setPlaylist
   } = useApplicationData();
 
   const tracks = getTracksForPlaylist(state, state.playlist);
-  
-  const playlists = playlistData.map((playlist) => {
-    return (
-      <Playlist 
-        key={playlist.id} 
-        {...playlist}
-      />
-    );
-  });
   
   const trackList = tracks.map((track) => {
     return (
@@ -82,33 +57,44 @@ export default function Application(props) {
             }
           </section>
           { cookies.username && 
-            playlists
+            <section className="playlists">
+              <Playlist
+                playlists={state.playlists}
+                value={state.playlist}
+                onChange={setPlaylist}
+                addPlaylist={addPlaylist}
+                editPlaylist={editPlaylist}
+                deletePlaylist={deletePlaylist}
+              />
+            </section>
           }
         </nav>
       </section>
-      { cookies.username &&
-        <section className="audio-player">
-          <AudioPlayer 
-            tracks={trackList} 
-            currentTrack={state.currentTrack}
-            isPlaying={isPlaying} 
-            restart={restart}
-          />
-        </section>
-      }
-      { !cookies.username &&
-        <section className="login">
-          <Login />
-        </section>
-      }
-      { cookies.username &&
-        <section className="tracks">
-          {trackList}
-          <Track
-            addTrack={addTrack} 
-          />
-        </section>
-      }
+      <section className="main-content">
+        { cookies.username &&
+          <section className="audio-player">
+            <AudioPlayer 
+              tracks={trackList} 
+              currentTrack={state.currentTrack}
+              isPlaying={isPlaying} 
+              restart={restart}
+            />
+          </section>
+        }
+        { !cookies.username &&
+          <section className="login">
+            <Login />
+          </section>
+        }
+        { cookies.username &&
+          <section className="tracks">
+            {trackList}
+            <Track
+              addTrack={addTrack} 
+            />
+          </section>
+        }
+      </section>
     </main>
   );
 }

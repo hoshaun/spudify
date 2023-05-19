@@ -1,5 +1,8 @@
-@import "styles/mixins.scss";
 @import "styles/variables.scss";
+@import "styles/mixins.scss";
+@import "styles/animations.scss";
+
+$track-height: 11rem;
 
 i {
   padding-left: 0.5rem;
@@ -34,42 +37,186 @@ i {
  }
 }
 
-
 .playlist {
-
-  &__item {
-    @include fade;
-
-    color: #8395a7;
-    height: 5rem;
-    padding-left: 2rem;
+color: rgb(47, 46, 46);
+  &__add {
+    min-height: $track-height;
+    padding: 2rem 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
+    align-items: center;
 
-    &:hover {
-      background-color: #ee5253;
-      cursor: pointer;
-      color: $dark-background;
-    }
-
-    &--selected {
-      @extend .playlist__item;
-      background-color: darken($white, 5%);
-      color: $dark-background;
-
-      &--full {
-        @extend .playlist__item--selected;
-      }
+    &-button {
+      @include button-inactive--opacity;
 
       &:hover {
-        background-color: darken($white, 5%);
+        @include button-active--opacity;
+      }
+    }
+  }
+
+  &__separator {
+    border: 0;
+    border-bottom: 1px solid darken($white, 5%);
+    width: 100%;
+    margin-left: 1rem;
+  }
+
+  &__card {
+    height: 80px;
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-flow: row nowrap;
+    color: $white;
+    &-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-width: 50%;
+      padding-top: 0.5rem;
+    }
+
+    &-right {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+        height: 50%;
+        width: 25%;
+  padding-top:2.25rem;
+  padding-right: 20px;
+    }
+
+    &--create {
+      color: $white;
+      display: flex;
+      width: 288px;
+      background-color: rgb(24, 24, 24);
+      border: 2px solid rgb(49, 49, 49);
+    }
+
+    &--show {
+      color: #FFBB00;
+      background: linear-gradient(
+        90deg,
+        rgba(49, 49, 49, $active-opacity),
+        rgba(#aa875c, $inactive-opacity) 8px,
+        rgba(#aa875c, $inactive-opacity) 0,
+        rgba(gray, $inactive-opacity)
+      );
+      &:hover {
+        color: rgb(49, 49, 49);
+        background-color: #FFBB00;
       }
     }
 
-    &--full {
-      @extend .playlist__item;
-      opacity: $inactive-opacity;
+    &--status {
+      background-color: $dark-background;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+    &--confirm {
+     color: $danger-color;
+     border: 2px solid $danger-color;
+      font-size: 10px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+      width: 288px;
+    }
+
+    &--error {
+      @include border-card($error-color);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &:last-of-type &__add,
+  &:last-of-type &__card {
+    display: none;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 25%;
+    &-modify {
+        width: fit-content
+    }
+    &-container {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+    }
+    &-button {
+      @include button-inactive--opacity;
+      margin-right: 0.5rem;
+      display: none;
+
+      &:hover {
+        @include button-active--opacity;
+      }
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+
+  &__card:hover &__actions-button {
+    display: inline;
+  }
+
+  &__create-input {
+    background-color: rgb(24, 24, 24);
+    border: 0;
+    border-bottom: 1px solid;
+    color: #FFBB00;
+    // color: #FFBB00;
+    font-size: 1.5rem;
+    height: 2rem;
+    margin-bottom: 0.25rem;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__status-image {
+    margin-right: 2rem;
+    animation: rotate 1s linear infinite;
+  }
+
+  &__error {
+    &-message {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-close {
+      @include button-inactive--opacity;
+
+      align-self: flex-start;
+      &:hover {
+        @include button-active--opacity;
+      }
+    }
+  }
+
+  &__validation {
+    color: $danger-color;
+    margin-bottom: 1rem;
   }
 }

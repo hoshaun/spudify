@@ -7,7 +7,7 @@ const getPlaylists = function(username) {
     SELECT playlists.id, playlists.name, array_agg(DISTINCT tracks.id) AS tracks
     FROM playlists
     JOIN users ON users.id = creator_id
-    JOIN tracks ON tracks.playlist_id = playlists.id
+    LEFT JOIN tracks ON tracks.playlist_id = playlists.id
     WHERE username = $1
     GROUP BY playlists.id
     ORDER BY playlists.id;
