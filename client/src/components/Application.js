@@ -70,29 +70,31 @@ export default function Application(props) {
           }
         </nav>
       </section>
-      { cookies.username &&
-        <section className="audio-player">
-          <AudioPlayer 
-            tracks={trackList} 
-            currentTrack={state.currentTrack}
-            isPlaying={isPlaying} 
-            restart={restart}
-          />
-        </section>
-      }
-      { !cookies.username &&
-        <section className="login">
-          <Login />
-        </section>
-      }
-      { cookies.username &&
-        <section className="tracks">
-          {trackList}
-          <Track
-            addTrack={addTrack} 
-          />
-        </section>
-      }
+      <section className="main-content">
+        { cookies.username &&
+          <section className="audio-player">
+            <AudioPlayer 
+              tracks={trackList} 
+              currentTrack={state.currentTrack}
+              isPlaying={isPlaying} 
+              restart={restart}
+            />
+          </section>
+        }
+        { !cookies.username &&
+          <section className="login">
+            <Login />
+          </section>
+        }
+        { cookies.username &&
+          <section className="tracks">
+            {trackList}
+            <Track
+              addTrack={addTrack} 
+            />
+          </section>
+        }
+      </section>
     </main>
   );
 }
