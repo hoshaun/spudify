@@ -70,8 +70,8 @@ export default function Application(props) {
           }
         </nav>
       </section>
-      <section className="main-content">
-        { cookies.username &&
+      { cookies.username &&
+        <section className="main-content">
           <section className="audio-player">
             <AudioPlayer 
               tracks={trackList} 
@@ -80,21 +80,19 @@ export default function Application(props) {
               restart={restart}
             />
           </section>
-        }
-        { !cookies.username &&
-          <section className="login">
-            <Login />
-          </section>
-        }
-        { cookies.username &&
           <section className="tracks">
             {trackList}
             <Track
               addTrack={addTrack} 
             />
           </section>
-        }
-      </section>
+        </section>
+      }
+      { !cookies.username &&
+        <section className="login">
+          <Login />
+        </section>
+      }
     </main>
   );
 }

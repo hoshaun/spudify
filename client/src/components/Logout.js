@@ -13,7 +13,7 @@ export default function Logout(props) {
 
   return (
     <div className="welcome">
-      <div className="welcome-message">Logged in as { cookies.username }</div>
+      <div className="welcome-message">Welcome, { cookies.username }!</div>
       <Button confirm onClick={() => logout()}>Logout</Button> 
     </div>
   );
