@@ -45,9 +45,8 @@ export default function Form(props) {
       </section>
       <section className="playlist__card-right">
         <section className="playlist__actions">
-          <i className="fa-regular fa-circle-play fa-1x" onClick={cancel}></i>
-          {/* <Button danger onClick={cancel} >X</Button> */}
-          <Button confirm onClick={validate} >✔</Button>
+        <i className=" fa-regular fa-circle-xmark fa-2x" onClick={cancel}></i>
+          <i className=" fa-regular fa-circle-check fa-2x" onClick={validate}></i>
         </section>
       </section>
     </main>
