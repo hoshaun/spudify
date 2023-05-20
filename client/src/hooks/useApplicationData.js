@@ -60,15 +60,26 @@ export default function useApplicationData() {
                 const trackData = Object.values(res.data);
                 const tracks = {};
                 
-                for (const i in trackData) {
-                  tracks[Number(i) + 1] = trackData[i];
+                for (const key in trackData) {
+                  let binary = '';
+                  const bytes = new Uint8Array(trackData[key].source.data);
+              
+                  for (let i = 0; i < bytes.byteLength; i++) {
+                      binary += String.fromCharCode(bytes[i]);
+                  }
+              
+                  trackData[key].source = 'data:' + trackData[key].mime_type + ';base64,' + btoa(binary);
+                  tracks[Number(key) + 1] = trackData[key];
                 }
-                
-                setIsLoading(false, 
-                  setState(prev => ({
-                    ...prev,
-                    tracks: tracks
-                  }))
+
+                setIsPlaying(false, 
+                  setRestart(false, 
+                    setState(prev => ({ ...prev, currentTrack: tracks[1]}), 
+                      setIsLoading(false, 
+                        setState(prev => ({ ...prev, tracks: tracks }))
+                      )
+                    )
+                  )
                 );
               });
           }
