@@ -41,6 +41,7 @@ export default function useApplicationData() {
   // GET requests to get data and rerender components
   useEffect(() => {
     if (cookies.username) {
+      setCurrentTrack({});
       setIsLoading(true);
       axios.get('/api/playlists', { params: { username: cookies.username } })
         .then(async res => {
