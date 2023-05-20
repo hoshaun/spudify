@@ -14,24 +14,12 @@ export default function DisplayTrack({
     progressBarRef.current.max = seconds;
   };
 
-  let src;
-
-  // convert downloaded file from DB to playable base64 audio string
-  if (currentTrack && currentTrack.source && currentTrack.mimeType) {
-    let binary = '';
-    const bytes = new Uint8Array(currentTrack.source.data);
-
-    for (let i = 0; i < bytes.byteLength; i++) {
-        binary += String.fromCharCode(bytes[i]);
-    }
-
-    src = 'data:' + currentTrack.mimeType + ';base64,' + btoa(binary);
-  }
+  const src = currentTrack.source ? currentTrack.source : '';
   
   return (
     <div>
       <audio
-        src={src ? src : ''}
+        src={src}
         ref={audioRef}
         onLoadedMetadata={onLoadedMetadata}
         onEnded={handleNext}

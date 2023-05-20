@@ -11,12 +11,11 @@
 
 .login {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   background-color: #572300;
-background-image: url("https://www.transparenttextures.com/patterns/farmer.png");
+  background-image: url("https://www.transparenttextures.com/patterns/farmer.png");
 }
 
 .logout {
@@ -30,8 +29,7 @@ background-image: url("https://www.transparenttextures.com/patterns/farmer.png")
   flex-direction: column;
   min-width: 20%;
   padding: $spacing 0;
-  // background-color: rgb(49, 49, 49);
-  background-color: rgb(24, 24, 24);
+  background-color: $dark-background;
   &--centered {
     align-self: center;
   }
@@ -40,7 +38,7 @@ background-image: url("https://www.transparenttextures.com/patterns/farmer.png")
     width: 90%;
     margin: $spacing 0;
     border: solid 1px;
-    color: darken($white, 5%);
+    color: #FFBB00;
   }
 
   &__menu {

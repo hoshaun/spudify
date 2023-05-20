@@ -31,7 +31,7 @@ export default function Controls({
   handleNext // Add handleNext prop
 }) {
   const playAnimationRef = useRef();
-  const [volume, setVolume] = useState(60);
+  const [volume, setVolume] = useState(25);
   const [muteVolume, setMuteVolume] = useState(false);
 
   const togglePlayPause = () => {
@@ -55,6 +55,7 @@ export default function Controls({
   }, [isPlaying, currentTrack/*, audioRef, duration, progressBarRef, setTimeProgress*/]);
 
   useEffect(() => {
+    console.log(isPlaying, restart);
     if (restart) {
       setRestart(false);
       audioRef.current.currentTime = 0;

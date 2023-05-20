@@ -1,0 +1,23 @@
+@import "styles/variables.scss";
+
+.loading {
+  display: flex;
+  position: fixed;
+  margin-left: 20%;
+  top: 0%;
+  left: 0%;
+  border-radius: 0.5em;
+  background-color: rgba($dark-background, 0.3);;
+  width: 100vw;
+  height: 100vh;
+}
+
+.spinner {
+  display: flex;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  margin-left: 50vw;
+  margin-top: 50vh;
+  animation: rotate 1s linear infinite;
+}

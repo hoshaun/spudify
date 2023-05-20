@@ -2,15 +2,30 @@
 @import "styles/mixins.scss";
 @import "styles/animations.scss";
 
-$track-height: 11rem;
-
 .track {
+  padding: 0.5em;
+
   &__add {
     min-height: $track-height;
-    padding: 2rem 0;
+    margin-left: 3rem;
+    border-radius: 0.5rem;
+    padding: 1.2rem 1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: rgba($confirm-color, $active-opacity);
+    background: linear-gradient(
+      90deg,
+      rgba($confirm-color, $active-opacity),
+      rgba($confirm-color, $active-opacity) 8px,
+      rgba($track-color, $inactive-opacity) 0,
+      rgba($track-color, $inactive-opacity)
+    );
+
+    &:hover {
+      color: $confirm-color;
+      background-color: rgba($track-color, $active-opacity);
+    }
 
     &-button {
       @include button-inactive--opacity;
@@ -63,20 +78,30 @@ $track-height: 11rem;
     &--create {
       background-color: $dark-background;
       display: flex;
+      color: #ffbb00;
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      input {
+        color: #ffbb00;
+      }
     }
 
     &--show {
-      color: rgba($track-color, $active-opacity);
+      color: rgba($confirm-color, $active-opacity);
       background: linear-gradient(
         90deg,
-        rgba($track-color, $active-opacity),
-        rgba($track-color, $active-opacity) 8px,
+        rgba($confirm-color, $active-opacity),
+        rgba($confirm-color, $active-opacity) 8px,
         rgba($track-color, $inactive-opacity) 0,
         rgba($track-color, $inactive-opacity)
       );
 
       &:hover {
-        color: darken($white, 5%);
+        color: $confirm-color;
         background-color: rgba($track-color, $active-opacity);
       }
     }
@@ -86,23 +111,34 @@ $track-height: 11rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      color: $confirm-color;
     }
 
     &--confirm {
-      @include border-card($danger-color);
-
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+      min-height: $track-height;
+      margin-left: 3rem;
+      border-radius: 0.5rem;
+      padding: 1.2rem 1.5rem;
+      border: solid 1px $danger-color;
+      background-color: $dark-background;
+      color: $confirm-color;
     }
 
     &--error {
-      @include border-card($error-color);
-
       display: flex;
       justify-content: space-between;
       align-items: center;
+      min-height: $track-height;
+      margin-left: 3rem;
+      border-radius: 0.5rem;
+      padding: 1.2rem 1.5rem;
+      border: solid 1px $error-color;
+      background-color: $dark-background;
+      color: $confirm-color;
     }
   }
 
@@ -123,6 +159,14 @@ $track-height: 11rem;
         @include button-active--opacity;
       }
 
+      .fa-pen-to-square:hover {
+        color: $confirm-color;
+      }
+
+      .fa-trash:hover {
+        color: $confirm-color;
+      }
+
       &:last-of-type {
         margin-right: 0;
       }
@@ -133,15 +177,36 @@ $track-height: 11rem;
     display: inline;
   }
 
+  &__create-form {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__create-input {
     background-color: $dark-background;
     border: 0;
     border-bottom: 1px solid;
-    color: $white;
+    color: $confirm-color;
     font-size: 1.5rem;
-    height: 2rem;
-    margin-bottom: 0.25rem;
+    height: 1.5rem;
+    margin-bottom: 1rem;
     width: 100%;
+
+    &--field {
+      display: flex;
+      font-size: 1.5rem;
+    }
+
+    &--label {
+      display: flex;
+      justify-content: flex-start;
+      padding-right: 0.5em;
+      font-size: 1em;
+    }
+
+    &--file {
+      border-bottom: none;
+    }
 
     &:focus {
       outline: none;

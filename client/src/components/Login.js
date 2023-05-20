@@ -28,7 +28,6 @@ export default function Login(props) {
 
   return (
     <div className="login-form">
-      <h1>Login</h1>
       <div className="fields">
         <div className="username-field">
           <h2 className="username-label">Username: </h2>

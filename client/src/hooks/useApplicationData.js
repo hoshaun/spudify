@@ -8,6 +8,7 @@ export default function useApplicationData() {
   const [isUpdated, setIsUpdated] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [restart, setRestart] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState({
     playlist: null,
     playlists: [],
@@ -40,6 +41,8 @@ export default function useApplicationData() {
   // GET requests to get data and rerender components
   useEffect(() => {
     if (cookies.username) {
+      setCurrentTrack({});
+      setIsLoading(true);
       axios.get('/api/playlists', { params: { username: cookies.username } })
         .then(async res => {
           if (res.data.playlists.length > 0) {
@@ -57,14 +60,27 @@ export default function useApplicationData() {
                 const trackData = Object.values(res.data);
                 const tracks = {};
                 
-                for (const i in trackData) {
-                  tracks[Number(i) + 1] = trackData[i];
+                for (const key in trackData) {
+                  let binary = '';
+                  const bytes = new Uint8Array(trackData[key].source.data);
+              
+                  for (let i = 0; i < bytes.byteLength; i++) {
+                      binary += String.fromCharCode(bytes[i]);
+                  }
+              
+                  trackData[key].source = 'data:' + trackData[key].mime_type + ';base64,' + btoa(binary);
+                  tracks[Number(key) + 1] = trackData[key];
                 }
-                
-                setState(prev => ({
-                  ...prev,
-                  tracks: tracks
-                }));
+
+                setIsPlaying(false, 
+                  setRestart(false, 
+                    setState(prev => ({ ...prev, currentTrack: tracks[1]}), 
+                      setIsLoading(false, 
+                        setState(prev => ({ ...prev, tracks: tracks }))
+                      )
+                    )
+                  )
+                );
               });
           }
         })
@@ -193,6 +209,7 @@ export default function useApplicationData() {
     state, 
     isPlaying,
     restart,
+    isLoading,
     addTrack, 
     editTrack, 
     deleteTrack, 

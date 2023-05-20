@@ -6,6 +6,7 @@ import Logout from "./Logout";
 import Track from "./Track";
 import AudioPlayer from './AudioPlayer';
 import Playlist from "./Playlist";
+import Loading from "./Loading";
 import useApplicationData from "hooks/useApplicationData";
 import { getTracksForPlaylist } from "helpers/selectors";
 
@@ -15,6 +16,7 @@ export default function Application(props) {
     state,
     isPlaying,
     restart,
+    isLoading,
     addTrack, 
     editTrack, 
     deleteTrack,
@@ -70,8 +72,8 @@ export default function Application(props) {
           }
         </nav>
       </section>
-      <section className="main-content">
-        { cookies.username &&
+      { cookies.username &&
+        <section className="main-content">
           <section className="audio-player">
             <AudioPlayer 
               tracks={trackList} 
@@ -80,21 +82,20 @@ export default function Application(props) {
               restart={restart}
             />
           </section>
-        }
-        { !cookies.username &&
-          <section className="login">
-            <Login />
-          </section>
-        }
-        { cookies.username &&
           <section className="tracks">
             {trackList}
+            { isLoading && <Loading /> }
             <Track
               addTrack={addTrack} 
             />
           </section>
-        }
-      </section>
+        </section>
+      }
+      { !cookies.username &&
+        <section className="login">
+          <Login />
+        </section>
+      }
     </main>
   );
 }

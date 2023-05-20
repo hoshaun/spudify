@@ -37,14 +37,14 @@
 }
 
 .button--danger:hover {
-  color: $white;
+  color: $black;
   background-color: $danger-color;
 }
 
 .button--confirm:hover {
-  color: black;
+  color: rgb(24, 24, 24);
   background-color: #FFBB00;
-  border-color: black
+  border-color: rgb(24, 24, 24)
 }
 
 .button:last-of-type {
