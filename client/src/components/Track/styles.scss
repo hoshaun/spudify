@@ -179,15 +179,36 @@ $track-height: 11rem;
     display: inline;
   }
 
+  &__create-form {
+    display: flex;
+    flex-direction: column;
+  }
+
   &__create-input {
     background-color: $dark-background;
     border: 0;
     border-bottom: 1px solid;
-    color: $white;
+    color: $confirm-color;
     font-size: 1.5rem;
-    height: 2rem;
+    height: 1.5rem;
     margin-bottom: 1rem;
     width: 100%;
+
+    &--field {
+      display: flex;
+      font-size: 1.5rem;
+    }
+
+    &--label {
+      display: flex;
+      justify-content: flex-start;
+      padding-right: 0.5em;
+      font-size: 1em;
+    }
+
+    &--file {
+      border-bottom: none;
+    }
 
     &:focus {
       outline: none;

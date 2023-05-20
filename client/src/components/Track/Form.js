@@ -46,27 +46,36 @@ export default function Form(props) {
     <main className="track__card track__card--create">
       <section className="track__card-left">
         <form autoComplete="off" onSubmit={e => e.preventDefault()}>
+          <div className="track__create-form">
+          <div className="track__create-input--field">
+            <div className="track__create-input--label">Title: </div>
+            <input
+              className="track__create-input text--semi-bold"
+              name="title"
+              type="text"
+              placeholder="Enter Track Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="track__create-input--field">
+            <div className="track__create-input--label">Artist: </div>
+            <input
+              className="track__create-input text--semi-bold"
+              name="artist"
+              type="text"
+              placeholder="Enter Artist Name"
+              value={artist}
+              onChange={(e) => setArtist(e.target.value)}
+            />
+          </div>
           <input
-            className="track__create-input text--semi-bold"
-            name="title"
-            type="text"
-            placeholder="Enter Track Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <input
-            className="track__create-input text--semi-bold"
-            name="artist"
-            type="text"
-            placeholder="Enter Artist Name"
-            value={artist}
-            onChange={(e) => setArtist(e.target.value)}
-          />
-          <input
+            className="track__create-input--file"
             name="source"
             type="file"
             onChange={(e) => setSource(e.target.files[0])}
           />
+          </div>
         </form>
         <section className="track__validation">{error}</section>
       </section>
