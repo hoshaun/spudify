@@ -6,6 +6,7 @@ import Logout from "./Logout";
 import Track from "./Track";
 import AudioPlayer from './AudioPlayer';
 import Playlist from "./Playlist";
+import Status from "./Track/Status";
 import useApplicationData from "hooks/useApplicationData";
 import { getTracksForPlaylist } from "helpers/selectors";
 
@@ -15,6 +16,7 @@ export default function Application(props) {
     state,
     isPlaying,
     restart,
+    isLoading,
     addTrack, 
     editTrack, 
     deleteTrack,
@@ -82,6 +84,7 @@ export default function Application(props) {
           </section>
           <section className="tracks">
             {trackList}
+            { isLoading && <Status message="LOADING" /> }
             <Track
               addTrack={addTrack} 
             />

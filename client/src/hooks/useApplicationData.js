@@ -8,6 +8,7 @@ export default function useApplicationData() {
   const [isUpdated, setIsUpdated] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [restart, setRestart] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [state, setState] = useState({
     playlist: null,
     playlists: [],
@@ -40,6 +41,7 @@ export default function useApplicationData() {
   // GET requests to get data and rerender components
   useEffect(() => {
     if (cookies.username) {
+      setIsLoading(true);
       axios.get('/api/playlists', { params: { username: cookies.username } })
         .then(async res => {
           if (res.data.playlists.length > 0) {
@@ -61,10 +63,12 @@ export default function useApplicationData() {
                   tracks[Number(i) + 1] = trackData[i];
                 }
                 
-                setState(prev => ({
-                  ...prev,
-                  tracks: tracks
-                }));
+                setIsLoading(false, 
+                  setState(prev => ({
+                    ...prev,
+                    tracks: tracks
+                  }))
+                );
               });
           }
         })
@@ -193,6 +197,7 @@ export default function useApplicationData() {
     state, 
     isPlaying,
     restart,
+    isLoading,
     addTrack, 
     editTrack, 
     deleteTrack, 
