@@ -17,18 +17,12 @@ export default function Show(props) {
       </section>
       <section className="track__card-right">
         <section className="track__actions">
-          <img
-            className="track__actions-button"
-            src="images/edit.png"
-            alt="Edit"
-            onClick={props.onEdit}
-          />
-          <img
-            className="track__actions-button"
-            src="images/trash.png"
-            alt="Delete"
-            onClick={props.onDelete}
-          />
+          <div className="track__actions-button">
+            <i className="fa-solid fa-pen-to-square fa-xl" onClick={props.onEdit}></i>
+          </div>
+          <div className="track__actions-button">
+            <i className="fa-sharp fa-solid fa-trash fa-xl" onClick={props.onDelete}></i>
+          </div>
         </section>
       </section>
     </main>

@@ -30,7 +30,7 @@
   min-width: 20%;
   padding: $spacing 0;
   // background-color: rgb(49, 49, 49);
-  background-color: rgb(24, 24, 24);
+  background-color: $dark-background;
   &--centered {
     align-self: center;
   }
@@ -39,7 +39,7 @@
     width: 90%;
     margin: $spacing 0;
     border: solid 1px;
-    color: darken($white, 5%);
+    color: #FFBB00;
   }
 
   &__menu {

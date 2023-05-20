@@ -79,7 +79,6 @@ export default function Track(props) {
   
   return (
     <article className="track">
-      <Header />
       {mode === EMPTY && (
         <Empty onAdd={() => transition(CREATE)} />
       )}
