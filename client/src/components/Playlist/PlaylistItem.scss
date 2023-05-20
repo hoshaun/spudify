@@ -108,6 +108,7 @@ color: rgb(47, 46, 46);
         rgba(gray, $inactive-opacity)
       );
       &:hover {
+        @include button-active--opacity;
         color: rgb(49, 49, 49);
         background-color: #FFBB00;
       }
@@ -118,6 +119,7 @@ color: rgb(47, 46, 46);
       display: flex;
       justify-content: center;
       align-items: center;
+      color: $confirm-color;
     }
 
     &--confirm {
@@ -133,11 +135,12 @@ color: rgb(47, 46, 46);
     }
 
     &--error {
-      @include border-card($error-color);
-
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border: solid 1px $error-color;
+      background-color: $dark-background;
+      color: $confirm-color;
     }
   }
 

@@ -118,7 +118,7 @@ export default function useApplicationData() {
     
     return axios.put(`/api/playlists/${id}`, playlist)
       .then(() => {
-        setState({ ...state, playlists });
+        setIsUpdated(!isUpdated, setState({ ...state, playlists }));
       });
   };
 
@@ -184,7 +184,7 @@ export default function useApplicationData() {
       headers: { 'Content-Type': 'multipart/form-data' } 
     })
       .then(() => {
-        setState({ ...state, tracks });
+        setIsUpdated(!isUpdated, setState({ ...state, tracks }));
       });
   };
 
