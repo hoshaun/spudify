@@ -14,8 +14,12 @@ export default function Show(props) {
       </section>
       <section className="playlist__card-right">
         <section className="playlist__actions">
+        <div className="playlist__actions-button">
         <i className="fa-solid fa-pen-to-square fa-xl" onClick={props.onEdit}></i>
+        </div>
+        <div className="playlist__actions-button">
         <i className="fa-sharp fa-solid fa-trash fa-xl" onClick={props.onDelete}></i>
+        </div>
         </section>
       </section>
     </main>
