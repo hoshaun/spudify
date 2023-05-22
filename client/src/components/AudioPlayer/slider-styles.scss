@@ -90,8 +90,4 @@ input[type="range"]::before {
   width: var(--range-progress);
   /* ... */
 }
-input[type="range"] {
-  --range-progress: 50%;
-  /* ... */
-}
 
