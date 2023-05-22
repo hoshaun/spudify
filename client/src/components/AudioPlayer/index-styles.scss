@@ -1,3 +1,5 @@
+@import "styles/variables.scss";
+
 * {
   box-sizing: border-box;
 }
@@ -11,7 +13,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #aa875c;
+  background: $dark-background;
   border-radius: 10px;
   height: 20%;
   width: 80%;
@@ -41,13 +43,14 @@ body {
 }
 
 .title {
-  color: #FFBB00;
+  color: $dark-background;
   font-weight: 100;
   font-size: 2em;
   margin-bottom: 0;
   padding: 2px;
   line-height: 37px;
-  background-color: rgba(0,0,0,.8);
+  background-color: #FFBB00;
+  border-radius: 0.1em;
 }
 
 /* audio image */
@@ -73,7 +76,7 @@ body {
   height: 80px;
   width: 80px;
   border-radius: 50%;
-  background: #aa875c;
+  background: $dark-background;
   color: #FFBB00;
 }
 

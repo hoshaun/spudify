@@ -34,9 +34,11 @@ export default function DisplayTrack({
         </div>
         <div className="text">
           { currentTrack && currentTrack.title && 
-            <p className="title">{currentTrack.title}</p>
+            <>
+              <p className="title">{currentTrack.title}</p>
+              <p>by {currentTrack ? currentTrack.artist : ''}</p>
+            </>
           }
-          <p>{currentTrack ? currentTrack.artist : ''}</p>
         </div>
       </div>
     </div>
