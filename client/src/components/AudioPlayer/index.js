@@ -38,8 +38,8 @@ export default function AudioPlayer(props) {
   };
 
   return (
-    <div className="audio-player">
-      <div className="inner">
+    <div className="inner">
+      {/* <div className="inner"> */}
         <DisplayTrack {...{
           currentTrack,
           audioRef,
@@ -69,7 +69,7 @@ export default function AudioPlayer(props) {
           timeProgress,
           duration
         }} />
-      </div>
+      {/* </div> */}
     </div>
   );
 }

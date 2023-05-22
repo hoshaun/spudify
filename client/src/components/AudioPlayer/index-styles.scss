@@ -8,23 +8,32 @@ body {
 }
 
 .audio-player {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #aa875c;
   border-radius: 10px;
   height: 20%;
   width: 80%;
   margin-top: 1%;
+  padding: 0.5em;
 }
 
 .inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 1em;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 /* audio info */
 .audio-info {
   display: flex;
-  gap: 20px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2em;
 }
 
 .text {
@@ -34,7 +43,7 @@ body {
 .title {
   color: #FFBB00;
   font-weight: 100;
-  font-size: 32px;
+  font-size: 2em;
   margin-bottom: 0;
   padding: 2px;
   line-height: 37px;
@@ -80,7 +89,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  padding-left: 40%;
 }
 
 .controls button, .volume button {
@@ -91,7 +102,7 @@ body {
 }
 
 button svg {
-  font-size: 20px;
+  font-size: 2em;
 }
 
 .volume {
@@ -111,14 +122,14 @@ button svg {
 }
 
 .control-button{
-  color:#FFBB00
+  color:#FFBB00;
 }
 
 /* time */
 .time {
   color: #FFBB00;
-  font-size: 13px;
-  line-height: 46px;
+  font-size: 1em;
+  line-height: 2em;
 }
 
 .time.current {
