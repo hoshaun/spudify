@@ -14,11 +14,13 @@ i {
 
   &.fa-sharp {
     padding-bottom: 0.75rem;
+
     &:hover {
       color: #FFBB00;
     }
   }
  &.fa-solid {
+  font-size: 25px;
   &:hover {
     color: black;
   }
@@ -38,10 +40,28 @@ i {
 }
 
 .playlist {
+
+&__item {
+  &--selected {
+    color: red;
+    background-color: red;
+  }
+}
+
 color: rgb(47, 46, 46);
   &__add {
-    min-height: $track-height;
     padding: 2rem 0;
+    height: 5rem;
+    border: 1px solid rgb(47, 46, 46);
+    color: white;
+    background: linear-gradient(
+      90deg,
+      rgba(49, 49, 49, $active-opacity),
+      rgba(#ffffff, $inactive-opacity) 8px,
+      rgba(#ffffff, $inactive-opacity) 0,
+      rgba(#373636, $inactive-opacity)
+    );
+    border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,6 +92,12 @@ color: rgb(47, 46, 46);
     flex-direction: column;
     flex-flow: row nowrap;
     color: $white;
+    &--selected {
+      @extend .playlist__card;
+      background-color: #FFBB00;
+      color: $dark-background;
+    }
+
     &-left {
       display: flex;
       flex-direction: column;
@@ -92,8 +118,6 @@ color: rgb(47, 46, 46);
 
     &--create {
       color: $white;
-      display: flex;
-      width: 288px;
       background-color: rgb(24, 24, 24);
       border: 2px solid rgb(49, 49, 49);
     }
@@ -107,6 +131,8 @@ color: rgb(47, 46, 46);
         rgba(#aa875c, $inactive-opacity) 0,
         rgba(gray, $inactive-opacity)
       );
+      border: 2px solid rgb(49, 49, 49);
+      margin-bottom: 0.25rem;
       &:hover {
         @include button-active--opacity;
         color: rgb(49, 49, 49);
@@ -127,11 +153,8 @@ color: rgb(47, 46, 46);
      border: 2px solid $danger-color;
       font-size: 10px;
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
       align-items: center;
       height: 80px;
-      width: 288px;
     }
 
     &--error {
@@ -152,8 +175,8 @@ color: rgb(47, 46, 46);
   &__actions {
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    width: 25%;
+    width: 10%;
+    
     &-modify {
         width: fit-content
     }

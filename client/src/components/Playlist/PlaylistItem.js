@@ -22,9 +22,8 @@ export default function PlaylistItem(props) {
   const ERROR_DELETE = "ERROR_DELETE";
   const { mode, transition, back } = useVisualMode(props.id ? SHOW : EMPTY);
   
-  const playlistClass = classNames('playlist__item', {
-    '--selected': props.selected,
-    '--full': props.spots === 0
+  const playlistClass = classNames('playlist__card playlist__card', {
+    '--selected': props.selected
   }).replace(/\s/g, '');
 
   // create button function
@@ -85,6 +84,7 @@ export default function PlaylistItem(props) {
       {mode === SHOW && (
         <Show 
           name={props.name} 
+          selected={props.selected} 
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         /> 
