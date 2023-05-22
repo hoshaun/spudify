@@ -28,6 +28,7 @@ export default function useApplicationData() {
 
   // clear playlist data if user changes
   useEffect(() => {
+    setIsLoading(false);
     setIsPlaying(false);
     setRestart(false);
     setState({
@@ -75,14 +76,17 @@ export default function useApplicationData() {
                 setIsPlaying(false, 
                   setRestart(false, 
                     setState(prev => ({ ...prev, currentTrack: tracks[1]}), 
-                      setIsLoading(false, 
-                        setState(prev => ({ ...prev, tracks: tracks }))
-                      )
+                      setState(prev => ({ ...prev, tracks: tracks }))
                     )
                   )
                 );
               });
+          } else {
+            setState(prev => ({ ...prev }));
           }
+        })
+        .then(() => {
+          setIsLoading(false);
         })
     }
   }, [isUpdated, cookies.username]);

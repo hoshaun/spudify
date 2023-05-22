@@ -53,18 +53,23 @@ color: rgb(47, 46, 46);
     padding: 2rem 0;
     height: 5rem;
     border: 1px solid rgb(47, 46, 46);
-    color: white;
+    color: $white;
     background: linear-gradient(
       90deg,
       rgba(49, 49, 49, $active-opacity),
-      rgba(#ffffff, $inactive-opacity) 8px,
-      rgba(#ffffff, $inactive-opacity) 0,
+      rgba($white, $inactive-opacity) 8px,
+      rgba($white, $inactive-opacity) 0,
       rgba(#373636, $inactive-opacity)
     );
     border-radius: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &:hover {
+      color: $confirm-color;
+      background: rgba($white, $inactive-opacity);
+    }
 
     &-button {
       @include button-inactive--opacity;
@@ -92,8 +97,10 @@ color: rgb(47, 46, 46);
     flex-direction: column;
     flex-flow: row nowrap;
     color: $white;
+
     &--selected {
       @extend .playlist__card;
+      @include button-active--opacity;
       background-color: #FFBB00;
       color: $dark-background;
     }
@@ -102,7 +109,7 @@ color: rgb(47, 46, 46);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-width: 50%;
+      min-width: 75%;
       padding-top: 0.5rem;
     }
 
@@ -110,10 +117,10 @@ color: rgb(47, 46, 46);
       display: flex;
       justify-content: flex-end;
       align-items: flex-end;
-        height: 50%;
-        width: 25%;
-  padding-top:2.25rem;
-  padding-right: 20px;
+      height: 50%;
+      width: 25%;
+      padding-top: 2.25rem;
+      padding-right: 20px;
     }
 
     &--create {
@@ -123,6 +130,8 @@ color: rgb(47, 46, 46);
     }
 
     &--show {
+      border: 2px solid rgb(49, 49, 49);
+      margin-bottom: 0.25rem;
       color: #FFBB00;
       background: linear-gradient(
         90deg,
@@ -131,8 +140,7 @@ color: rgb(47, 46, 46);
         rgba(#aa875c, $inactive-opacity) 0,
         rgba(gray, $inactive-opacity)
       );
-      border: 2px solid rgb(49, 49, 49);
-      margin-bottom: 0.25rem;
+
       &:hover {
         @include button-active--opacity;
         color: rgb(49, 49, 49);

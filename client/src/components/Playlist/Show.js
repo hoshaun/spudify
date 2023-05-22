@@ -9,7 +9,7 @@ export default function Show(props) {
 
   return (
     <main className={showClass}>
-      <section className="playlist__card-left">
+      <section className="playlist__card-left" onClick={props.setPlaylist}>
         <h2 className="text--regular">{props.name}</h2>
       </section>
       <section className="playlist__card-right">

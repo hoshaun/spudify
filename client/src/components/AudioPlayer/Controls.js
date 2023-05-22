@@ -55,18 +55,19 @@ export default function Controls({
   }, [isPlaying, currentTrack/*, audioRef, duration, progressBarRef, setTimeProgress*/]);
 
   useEffect(() => {
-    console.log(isPlaying, restart);
-    if (restart) {
-      setRestart(false);
-      audioRef.current.currentTime = 0;
-      audioRef.current.play();
-    } else if (isPlaying) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-      cancelAnimationFrame(playAnimationRef.current);
+    if (currentTrack.source) {
+      if (restart) {
+        setRestart(false);
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      } else if (isPlaying) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+        cancelAnimationFrame(playAnimationRef.current);
+      }
+      playAnimationRef.current = requestAnimationFrame(repeat);
     }
-    playAnimationRef.current = requestAnimationFrame(repeat);
   }, [isPlaying, currentTrack/*, audioRef, repeat*/]);
 
   useEffect(() => {

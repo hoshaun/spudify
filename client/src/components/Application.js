@@ -72,7 +72,7 @@ export default function Application(props) {
           }
         </nav>
       </section>
-      { cookies.username &&
+      { cookies.username && state.playlist &&
         <section className="main-content">
           <section className="audio-player">
             <AudioPlayer 

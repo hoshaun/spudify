@@ -57,7 +57,7 @@ router.delete('/:id', (req, res) => {
 
   playlistQueries.deletePlaylist(id)
     .then(() => {
-      return;
+      return res.status(200).send('Playlist successfully deleted.');
     })
     .catch(err => {
       res

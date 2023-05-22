@@ -76,7 +76,6 @@ export default function PlaylistItem(props) {
   return (
     <li 
       className={playlistClass} 
-      onClick={props.setPlaylist}
     >
       {mode === EMPTY && (
         <Empty onAdd={() => transition(CREATE)} />
@@ -85,6 +84,7 @@ export default function PlaylistItem(props) {
         <Show 
           name={props.name} 
           selected={props.selected} 
+          setPlaylist={props.setPlaylist}
           onDelete={() => transition(CONFIRM)}
           onEdit={() => transition(EDIT)}
         /> 
