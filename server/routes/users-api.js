@@ -50,7 +50,7 @@ router.post('/create', (req, res) => {
   const password = req.body.password;
   
   if (!(username && isAlphanumeric(username))) {
-    return res.status(400).send('Username must to be alphanumeric.\n');
+    return res.status(400).send('Username must be alphanumeric.\n');
   }
 
   if (!password) {
