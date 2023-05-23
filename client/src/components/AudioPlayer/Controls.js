@@ -31,7 +31,7 @@ export default function Controls({
   handleNext // Add handleNext prop
 }) {
   const playAnimationRef = useRef();
-  const [volume, setVolume] = useState(25);
+  const [volume, setVolume] = useState(10);
   const [muteVolume, setMuteVolume] = useState(false);
 
   const togglePlayPause = () => {
