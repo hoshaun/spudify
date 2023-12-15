@@ -18,3 +18,9 @@ From the root directory of the project, `cd server` and then please refer to [se
 ## Frontend (React) Setup
 
 From the root directory of the project, `cd client` and then please refer to [client README](./client/README.md) for frontend setup instructions.
+
+## Login Page View
+!["spudify_login"](./docs/spudify_login.png)
+
+## Main App View
+!["spudify_main"](./docs/spudify_main.png)
